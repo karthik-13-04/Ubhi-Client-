@@ -1,0 +1,156 @@
+
+> ubhi-next@1.0.0 dev
+> next dev
+
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3000
+  - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 2.1s
+ ○ Compiling / ...
+ ✓ Compiled / in 3.8s (480 modules)
+ GET / 200 in 4254ms
+ GET / 200 in 375ms
+ ○ Compiling /api/[[...path]] ...
+ ✓ Compiled /api/[[...path]] in 3.7s (912 modules)
+ GET /api/settings/site_profile 200 in 7040ms
+ GET /api/settings/site_profile 200 in 7029ms
+ GET /api/settings/site_profile 200 in 7098ms
+ GET / 200 in 417ms
+ GET /api/settings/site_profile 200 in 58ms
+ GET /api/settings/site_profile 200 in 57ms
+ GET /api/settings/site_profile 200 in 61ms
+ ✓ Compiled /[...slug] in 437ms (1144 modules)
+ GET /api/settings/site_profile 200 in 1704ms
+ ✓ Compiled in 329ms (480 modules)
+ ✓ Compiled in 409ms (466 modules)
+ ✓ Compiled in 417ms (466 modules)
+ GET / 200 in 458ms
+ ✓ Compiled /api/[[...path]] in 191ms (912 modules)
+ GET /api/settings/site_profile 200 in 1269ms
+ GET /api/settings/site_profile 200 in 1258ms
+ GET /api/settings/site_profile 200 in 1291ms
+ ✓ Compiled in 243ms (480 modules)
+ ✓ Compiled in 365ms (466 modules)
+ GET / 200 in 520ms
+ ✓ Compiled /api/[[...path]] in 218ms (912 modules)
+ GET /api/settings/site_profile 200 in 1255ms
+ GET /api/settings/site_profile 200 in 1297ms
+ GET /api/settings/site_profile 200 in 1283ms
+ GET /?id=9effc4b0-c789-4d06-88fc-56d106e487f0&vscodeBrowserReqId=1781940790789 200 in 493ms
+ GET /api/settings/site_profile 200 in 74ms
+ GET /api/settings/site_profile 200 in 57ms
+ GET /api/settings/site_profile 200 in 49ms
+ GET /api/settings/site_profile 200 in 66ms
+ ✓ Compiled in 407ms (480 modules)
+ ✓ Compiled in 683ms (466 modules)
+ ✓ Compiled in 713ms (480 modules)
+ ✓ Compiled in 396ms (466 modules)
+ GET /?id=9effc4b0-c789-4d06-88fc-56d106e487f0&vscodeBrowserReqId=1781941085770 200 in 471ms
+ ✓ Compiled /api/[[...path]] in 232ms (912 modules)
+ GET /api/settings/site_profile 200 in 1381ms
+ GET /api/settings/site_profile 200 in 1436ms
+ GET /api/settings/site_profile 200 in 1414ms
+ GET / 200 in 520ms
+ GET /api/settings/site_profile 200 in 232ms
+ GET /api/settings/site_profile 200 in 126ms
+ GET /api/settings/site_profile 200 in 144ms
+ ✓ Compiled in 316ms (480 modules)
+ ✓ Compiled in 303ms (480 modules)
+ ✓ Compiled in 929ms (466 modules)
+ ✓ Compiled in 239ms (480 modules)
+ GET / 200 in 393ms
+ ✓ Compiled /api/[[...path]] in 454ms (912 modules)
+ GET /api/settings/site_profile 200 in 1617ms
+ GET /api/settings/site_profile 200 in 1665ms
+ GET /api/settings/site_profile 200 in 1632ms
+ ✓ Compiled /[...slug] in 429ms (914 modules)
+ GET /.well-known/appspecific/com.chrome.devtools.json 200 in 1786ms
+ ✓ Compiled in 279ms (480 modules)
+ ✓ Compiled in 390ms (466 modules)
+ ✓ Compiled /api/[[...path]] in 264ms (912 modules)
+ GET /api/settings/site_profile 200 in 1311ms
+ GET /api/settings/site_profile 200 in 1368ms
+ GET /api/settings/site_profile 200 in 1288ms
+ GET /api/settings/site_profile 200 in 1295ms
+ GET /api/settings/site_profile 200 in 1320ms
+ GET /api/settings/site_profile 200 in 1051ms
+ GET /api/settings/site_profile 200 in 1051ms
+ GET /api/settings/site_profile 200 in 1512ms
+ GET /api/settings/site_profile 200 in 1753ms
+ ✓ Compiled in 392ms (1142 modules)
+ GET /api/settings/site_profile 200 in 1014ms
+ GET /api/settings/site_profile 200 in 939ms
+ GET /api/settings/site_profile 200 in 941ms
+ GET /api/settings/site_profile 200 in 943ms
+ GET /api/settings/site_profile 200 in 945ms
+ GET /api/settings/site_profile 200 in 220ms
+ GET /api/settings/site_profile 200 in 210ms
+ GET /api/settings/site_profile 200 in 1164ms
+ GET /api/settings/site_profile 200 in 1190ms
+ ✓ Compiled in 318ms (1142 modules)
+ ✓ Compiled in 237ms (480 modules)
+ ✓ Compiled in 355ms (466 modules)
+ ✓ Compiled /api/[[...path]] in 287ms (912 modules)
+ GET /api/settings/site_profile 200 in 1289ms
+ GET /api/settings/site_profile 200 in 1360ms
+ GET /api/settings/site_profile 200 in 1350ms
+ GET /api/settings/site_profile 200 in 1299ms
+ GET /api/settings/site_profile 200 in 1334ms
+ GET /api/settings/site_profile 200 in 987ms
+ GET /api/settings/site_profile 200 in 1003ms
+ GET /api/settings/site_profile 200 in 1481ms
+ GET /api/settings/site_profile 200 in 1602ms
+ ✓ Compiled in 321ms (1142 modules)
+ ✓ Compiled in 357ms (1142 modules)
+ GET / 200 in 492ms
+ GET /api/settings/site_profile 200 in 967ms
+ GET /api/settings/site_profile 200 in 974ms
+ GET /api/settings/site_profile 200 in 1057ms
+ GET / 200 in 316ms
+ GET /api/settings/site_profile 200 in 59ms
+ GET /api/settings/site_profile 200 in 54ms
+ GET /api/settings/site_profile 200 in 51ms
+ ✓ Compiled in 319ms (466 modules)
+ ✓ Compiled in 340ms (466 modules)
+ GET / 200 in 591ms
+ ✓ Compiled /api/[[...path]] in 200ms (912 modules)
+ GET /api/settings/site_profile 200 in 1271ms
+ GET /api/settings/site_profile 200 in 1235ms
+ GET /api/settings/site_profile 200 in 1261ms
+ ✓ Compiled /[...slug] in 188ms (238 modules)
+ ○ Compiling /_not-found ...
+ GET /festivals/ram-navami 200 in 2941ms
+ ✓ Compiled /_not-found in 2.8s (471 modules)
+ GET /_next/static/chunks/main-app.js?v=1781942674137 200 in 1515ms
+ GET /_next/static/chunks/app/%5B...slug%5D/page.js 200 in 1473ms
+ GET /_next/static/chunks/app-pages-internals.js 200 in 1499ms
+ GET /_next/static/css/app/layout.css?v=1781942674137 200 in 1768ms
+ GET / 404 in 55ms
+ ○ Compiling /_error ...
+ ✓ Compiled /_error in 3.2s (698 modules)
+ GET /_next/static/css/app/layout.css?v=1781942677444 500 in 4752ms
+ GET /_next/static/chunks/main-app.js?v=1781942677444 500 in 4750ms
+ GET /_next/static/chunks/app-pages-internals.js 500 in 4751ms
+ GET / 404 in 115ms
+ GET /_next/static/chunks/main-app.js?v=1781942688858 200 in 1253ms
+ GET /_next/static/css/app/layout.css?v=1781942688858 200 in 1267ms
+ GET /_next/static/chunks/app-pages-internals.js 200 in 1264ms
+ GET / 200 in 617ms
+ ✓ Compiled /api/[[...path]] in 474ms (955 modules)
+ GET /api/settings/site_profile 200 in 1709ms
+ GET /api/settings/site_profile 200 in 1749ms
+ GET /api/settings/site_profile 200 in 1654ms
+ ✓ Compiled in 710ms (691 modules)
+ ✓ Compiled /api/[[...path]] in 334ms (951 modules)
+ GET /api/settings/site_profile 200 in 2457ms
+ GET /api/settings/site_profile 200 in 2993ms
+ GET /api/settings/site_profile 200 in 2462ms
+ GET /api/settings/site_profile 200 in 3029ms
+ GET /api/settings/site_profile 200 in 3060ms
+ GET /api/settings/site_profile 200 in 3030ms
+ ✓ Compiled in 741ms (1366 modules)
+ ✓ Compiled in 749ms (1366 modules)
+ ✓ Compiled in 1348ms (705 modules)
+ ✓ Compiled in 598ms (705 modules)

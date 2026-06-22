@@ -1,0 +1,12 @@
+[
+  {
+    "id": "50362a7f-1743-4c56-9641-dc50e438fdb3",
+    "email": "owner@ubhi.local",
+    "password_hash": "$2a$10$twD/5OgMdN3VslY9.L1nEuJPnU1A3fPAVMuQTJMyzK/atHgXAypTa",
+    "role": "owner",
+    "permissions": [],
+    "name": "Owner",
+    "active": true,
+    "created_at": "2026-06-16T19:29:23.935Z"
+  }
+]

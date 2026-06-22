@@ -1,0 +1,9 @@
+{
+  "/api/[[...path]]/route": "app/api/[[...path]]/route.js",
+  "/page": "app/page.js",
+  "/shop/page": "app/shop/page.js",
+  "/snail-mail/page": "app/snail-mail/page.js",
+  "/journal/page": "app/journal/page.js",
+  "/about/page": "app/about/page.js",
+  "/workshops/page": "app/workshops/page.js"
+}
