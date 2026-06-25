@@ -1,0 +1,918 @@
+<div id="page-admin" class="page">
+          <!-- Passcode Gate -->
+          <div id="admin-gate" class="admin-gate-wrapper reveal">
+            <div class="admin-login-card">
+              <div class="admin-login-header">
+                <svg viewBox="0 0 100 100" class="admin-login-yantra"><circle cx="50" cy="50" r="45" stroke="var(--aurora-gold)" stroke-width="0.75" fill="none"/><polygon points="50,15 80,70 20,70" stroke="var(--aurora-gold)" stroke-width="0.5" fill="none"/><polygon points="50,85 80,30 20,30" stroke="var(--aurora-gold)" stroke-width="0.5" fill="none"/></svg>
+                <h3>The Keeper's Desk</h3>
+                <p>A quiet passcode keeps this drawer shut. Slip it in to come inside.</p>
+              </div>
+              <form id="admin-login-form">
+                <div class="sanctuary-input-group">
+                  <label for="admin-passcode">Passcode</label>
+                  <input type="password" id="admin-passcode" required placeholder="••••••••">
+                </div>
+                <p id="admin-login-error" class="admin-error-text" style="display:none; color:var(--aurora-rose); font-size:0.85rem; margin-top:-16px; margin-bottom:16px;"></p>
+                <button type="submit" class="button button-primary" style="width:100%; text-align:center;">Unlock the Desk</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Admin Dashboard -->
+          <div id="admin-dashboard" class="admin-dashboard-wrapper" style="display:none;">
+            <div class="admin-header">
+              <div class="admin-header-rail">
+                <button type="button" id="admin-nav-toggle" class="admin-nav-toggle" aria-label="Show or hide the menu" aria-controls="admin-tabs-nav" aria-expanded="true" title="Hide / show the menu">
+                  <span></span><span></span><span></span>
+                </button>
+                <a class="admin-header-brand" href="/#home" aria-label="Ubhi home">
+                  <img src="/assets/ubhi-logo-transparent.png" alt="Ubhi" />
+                  <span>The Keeper's Desk</span>
+                </a>
+                <button type="button" class="button button-secondary" id="admin-logout-btn">Lock the Desk</button>
+              </div>
+              <div class="admin-welcome">
+                <h3>The Keeper's Desk</h3>
+                <p>Where the workshops, shop, members' sheet, journal &amp; archives are kept — tended by hand.</p>
+              </div>
+            </div>
+
+            <div class="admin-tabs-nav" id="admin-tabs-nav" role="navigation" aria-label="Admin sections">
+              <button type="button" class="admin-tab-btn is-active" data-admin-tab="overview">Overview</button>
+              <button type="button" class="admin-tab-btn" data-admin-tab="gallery">Gallery</button>
+              <button type="button" class="admin-tab-btn" data-admin-tab="artfolio">Art Portfolio</button>
+              <button type="button" class="admin-tab-btn" data-admin-tab="workshops">Workshops</button>
+              <button type="button" class="admin-tab-btn" data-admin-tab="shop">Shop</button>
+              <button type="button" class="admin-tab-btn" data-admin-tab="snail">Snail Mail</button>
+              <button type="button" class="admin-tab-btn" data-admin-tab="customers">Customers</button>
+              <button type="button" class="admin-tab-btn" data-admin-tab="journal">Art &amp; Journal</button>
+              <button type="button" class="admin-tab-btn" data-admin-tab="orders">Orders & Bookings</button>
+              <button type="button" class="admin-tab-btn" data-admin-tab="updates">Email Updates</button>
+              <button type="button" class="admin-tab-btn" data-admin-tab="profile">Site Profile</button>
+              <button type="button" class="admin-tab-btn" data-admin-tab="settings">Settings</button>
+            </div>
+            <div id="admin-nav-scrim" class="admin-nav-scrim" hidden></div>
+
+            <!-- TAB CONTENT: GALLERY -->
+            <!-- ───────── Overview · at-a-glance dashboard ───────── -->
+            <div class="admin-tab-content is-active" id="admin-tab-overview">
+              <div class="admin-section-card ov-insights">
+                <div class="admin-card-header-actions">
+                  <h4 style="margin:0;">Business health</h4>
+                </div>
+                <p style="font-size:0.88rem;color:var(--mist);line-height:1.5;margin:-2px 0 16px;">Your key numbers, worked out live from your subscribers, orders and bookings.</p>
+                <div class="admin-overview-grid ov-metrics">
+                  <div class="admin-stat-card stat-mrr">
+                    <span class="admin-stat-label">Monthly recurring revenue</span>
+                    <span class="admin-stat-number" id="ov-mrr">£0</span>
+                    <span class="admin-stat-sub" id="ov-mrr-sub">from 0 subscribers</span>
+                  </div>
+                  <div class="admin-stat-card stat-active">
+                    <span class="admin-stat-label">Active subscribers</span>
+                    <span class="admin-stat-number" id="ov-active">0</span>
+                    <span class="admin-stat-sub" id="ov-active-sub">Snail Mail Club</span>
+                  </div>
+                  <div class="admin-stat-card stat-churn">
+                    <span class="admin-stat-label">Churn (cancelled)</span>
+                    <span class="admin-stat-number" id="ov-churn">0%</span>
+                    <span class="admin-stat-sub" id="ov-churn-sub">0 of 0 members</span>
+                  </div>
+                  <div class="admin-stat-card stat-revmonth">
+                    <span class="admin-stat-label">Revenue this month</span>
+                    <span class="admin-stat-number" id="ov-revmonth">£0</span>
+                    <span class="admin-stat-sub">subs + shop + workshops</span>
+                  </div>
+                </div>
+                <div class="ov-insights-row">
+                  <div class="ov-panel">
+                    <div class="ov-panel-title">Revenue, last 6 months</div>
+                    <div class="ov-bars" id="ov-trend"></div>
+                  </div>
+                  <div class="ov-panel">
+                    <div class="ov-panel-title">Top sellers</div>
+                    <ul class="ov-top" id="ov-top"><li><span class="ov-top-n">—</span></li></ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="admin-section-card">
+                <div class="admin-card-header-actions">
+                  <h4 style="margin:0;">A view from the desk</h4>
+                </div>
+                <p style="font-size:0.88rem;color:var(--mist);line-height:1.5;margin:-2px 0 18px;">Everything at a glance — figures refresh each time you open this tab.</p>
+                <div class="admin-overview-grid">
+                  <div class="admin-stat-card stat-orders">
+                    <span class="admin-stat-label">Shop Orders</span>
+                    <span class="admin-stat-number" id="ov-orders-count">0</span>
+                    <span class="admin-stat-sub" id="ov-orders-sub">£0 received</span>
+                  </div>
+                  <div class="admin-stat-card stat-bookings">
+                    <span class="admin-stat-label">Workshop Bookings</span>
+                    <span class="admin-stat-number" id="ov-bookings-count">0</span>
+                    <span class="admin-stat-sub" id="ov-bookings-sub">£0 reserved</span>
+                  </div>
+                  <div class="admin-stat-card stat-members">
+                    <span class="admin-stat-label">Snail Mail Members</span>
+                    <span class="admin-stat-number" id="ov-members-count">0</span>
+                    <span class="admin-stat-sub" id="ov-members-sub">0 active · 0 paused</span>
+                  </div>
+                  <div class="admin-stat-card stat-subs">
+                    <span class="admin-stat-label">Email Subscribers</span>
+                    <span class="admin-stat-number" id="ov-subs-count">0</span>
+                    <span class="admin-stat-sub">on the keep-posted list</span>
+                  </div>
+                  <div class="admin-stat-card stat-shop">
+                    <span class="admin-stat-label">Shop Pieces</span>
+                    <span class="admin-stat-number" id="ov-shop-count">0</span>
+                    <span class="admin-stat-sub" id="ov-shop-sub">0 low on stock</span>
+                  </div>
+                  <div class="admin-stat-card stat-workshops">
+                    <span class="admin-stat-label">Workshops</span>
+                    <span class="admin-stat-number" id="ov-workshops-count">0</span>
+                    <span class="admin-stat-sub">in the catalogue</span>
+                  </div>
+                  <div class="admin-stat-card stat-journal">
+                    <span class="admin-stat-label">Art &amp; Journal</span>
+                    <span class="admin-stat-number" id="ov-journal-count">0</span>
+                    <span class="admin-stat-sub">posts published</span>
+                  </div>
+                  <div class="admin-stat-card stat-gallery">
+                    <span class="admin-stat-label">Gallery Images</span>
+                    <span class="admin-stat-number" id="ov-gallery-count">0</span>
+                    <span class="admin-stat-sub">in the home carousel</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="admin-section-card">
+                <h4>Needs a gentle eye</h4>
+                <ul class="admin-attention-list" id="admin-overview-attention">
+                  <li class="calm"><span class="att-dot"></span>All calm — nothing needs your attention right now.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="admin-tab-content" id="admin-tab-gallery">
+              <div class="admin-section-card">
+                <h4>Add Gallery Image (Home Carousel)</h4>
+                <form id="admin-add-gallery-form" class="admin-grid-form">
+                  <div class="admin-form-group">
+                    <label>Image Resource</label>
+                    <div class="image-upload-wrapper">
+                      <input type="text" id="admin-gallery-url" placeholder="assets/filename.png or https://url.com/img.jpg">
+                      <span style="padding:0 8px;color:rgba(255,255,255,0.4);">or</span>
+                      <input type="file" id="admin-gallery-file" accept="image/*">
+                    </div>
+                  </div>
+                  <div class="admin-form-group">
+                    <label>Alt / Caption Description</label>
+                    <input type="text" id="admin-gallery-alt" placeholder="e.g. Somatic movement practice" required>
+                  </div>
+                  <button type="submit" class="button button-primary">Publish Image</button>
+                </form>
+              </div>
+
+              <div class="admin-section-card admin-list-card">
+                <h4>Current Gallery Images</h4>
+                <input type="text" class="admin-list-search" id="admin-gallery-search" placeholder="Search images by caption…">
+                <div class="admin-gallery-list" id="admin-gallery-items-list">
+                  <!-- Javascript populated -->
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB CONTENT: ART PORTFOLIO -->
+            <div class="admin-tab-content" id="admin-tab-artfolio">
+              <div class="admin-section-card">
+                <h4>Add a New Art Piece</h4>
+                <p class="admin-help-text">Each piece is one artwork. Give it a title and a first photo (the <strong>cover</strong> shown in the gallery). After it's added you can attach more photos to it below — visitors will <strong>swipe</strong> through them when they open the piece.</p>
+                <form id="admin-add-artpiece-form" class="admin-grid-form">
+                  <div class="admin-form-group">
+                    <label>Title</label>
+                    <input type="text" id="admin-artpiece-title" placeholder="e.g. Sacred Geometry — Study no. 4" required>
+                  </div>
+                  <div class="admin-form-group">
+                    <label>Cover photo</label>
+                    <div class="image-upload-wrapper">
+                      <input type="text" id="admin-artpiece-url" placeholder="assets/filename.png or https://url.com/img.jpg">
+                      <span style="padding:0 8px;color:rgba(255,255,255,0.4);">or</span>
+                      <input type="file" id="admin-artpiece-file" accept="image/*">
+                    </div>
+                  </div>
+                  <button type="submit" class="button button-primary">Add Piece</button>
+                </form>
+              </div>
+
+              <div class="admin-section-card admin-list-card">
+                <h4>Your Art Pieces</h4>
+                <div id="admin-artfolio-list">
+                  <!-- Javascript populated -->
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB CONTENT: WORKSHOPS -->
+            <div class="admin-tab-content" id="admin-tab-workshops">
+              <div class="admin-section-card">
+                <h4>Add New Workshop</h4>
+                <form id="admin-add-workshop-form" class="admin-grid-form">
+                  <div class="admin-form-row col-3">
+                    <div class="admin-form-group">
+                      <label>Workshop Title</label>
+                      <input type="text" id="admin-workshop-title" placeholder="e.g. Somatic Pottery" required>
+                    </div>
+                    <div class="admin-form-group">
+                      <label>Category / Eyebrow</label>
+                      <input type="text" id="admin-workshop-eyebrow" placeholder="e.g. Clay · 14 October" required>
+                    </div>
+                    <div class="admin-form-group">
+                      <label>Poster Image (URL or File)</label>
+                      <div class="image-upload-wrapper">
+                        <input type="text" id="admin-workshop-img-url" placeholder="assets/pots.png">
+                        <input type="file" id="admin-workshop-img-file" accept="image/*">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="admin-form-row col-4">
+                    <div class="admin-form-group">
+                      <label>Time</label>
+                      <input type="text" id="admin-workshop-time" placeholder="e.g. 10:30–13:00" required>
+                    </div>
+                    <div class="admin-form-group">
+                      <label>Place</label>
+                      <input type="text" id="admin-workshop-place" placeholder="e.g. Hackney studio" required>
+                    </div>
+                    <div class="admin-form-group">
+                      <label>Price (£)</label>
+                      <input type="number" id="admin-workshop-price" placeholder="58" required>
+                    </div>
+                    <div class="admin-form-group">
+                      <label>Seat Capacity</label>
+                      <input type="number" id="admin-workshop-capacity" placeholder="10" required>
+                    </div>
+                  </div>
+                  <div class="admin-form-group">
+                    <label>Description</label>
+                    <textarea id="admin-workshop-desc" placeholder="Write description of the practice..." required></textarea>
+                  </div>
+                  <button type="submit" class="button button-primary">Publish Workshop</button>
+                </form>
+              </div>
+
+              <div class="admin-section-card admin-list-card">
+                <h4>Active Workshops</h4>
+                <input type="text" class="admin-list-search" id="admin-workshops-search" placeholder="Search workshops by title, theme or place…">
+                <div class="admin-table-responsive">
+                  <table class="admin-table">
+                    <thead>
+                      <tr>
+                        <th>Workshop</th>
+                        <th>Details</th>
+                        <th>Price</th>
+                        <th>Spaces</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="admin-workshops-table-body">
+                      <!-- Javascript populated -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB CONTENT: SHOP -->
+            <div class="admin-tab-content" id="admin-tab-shop">
+              <div class="admin-section-card">
+                <h4>Add Shop Product</h4>
+                <form id="admin-add-shop-form" class="admin-grid-form">
+                  <div class="admin-form-row col-3">
+                    <div class="admin-form-group">
+                      <label>Product Name</label>
+                      <input type="text" id="admin-shop-name" placeholder="e.g. Indigo Clay Bowl" required>
+                    </div>
+                    <div class="admin-form-group">
+                      <label>Category / Eyebrow</label>
+                      <input type="text" id="admin-shop-eyebrow" placeholder="e.g. Altari object" required>
+                    </div>
+                    <div class="admin-form-group">
+                      <label>Price (£)</label>
+                      <input type="number" id="admin-shop-price" placeholder="42" required>
+                    </div>
+                  </div>
+                  <div class="admin-form-row col-3">
+                    <div class="admin-form-group">
+                      <label>Total Stock</label>
+                      <input type="number" id="admin-shop-stock-total" placeholder="50" required>
+                    </div>
+                    <div class="admin-form-group">
+                      <label>Stock Remaining</label>
+                      <input type="number" id="admin-shop-stock-remaining" placeholder="12" required>
+                    </div>
+                    <div class="admin-form-group">
+                      <label>Product Image (URL, File or Vector Theme)</label>
+                      <div class="image-upload-wrapper">
+                        <input type="text" id="admin-shop-img-url" placeholder="assets/bowl.png">
+                        <input type="file" id="admin-shop-img-file" accept="image/*">
+                        <select id="admin-shop-vector-theme">
+                          <option value="">-- Or Select SVG Theme --</option>
+                          <option value="yantra">Yantra Mandala</option>
+                          <option value="lotus">Lotus Geometry</option>
+                          <option value="concentric">Concentric Rings</option>
+                          <option value="lines">Astrological Coordinates</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="admin-form-group">
+                    <label>Product Description</label>
+                    <textarea id="admin-shop-desc-text" placeholder="Write description of product..." required></textarea>
+                  </div>
+                  <button type="submit" class="button button-primary">Publish Product</button>
+                </form>
+              </div>
+
+              <div class="admin-section-card admin-list-card">
+                <h4>Current Shop Catalog</h4>
+                <input type="text" class="admin-list-search" id="admin-shop-search" placeholder="Search products by name or category…">
+                <div class="admin-table-responsive">
+                  <table class="admin-table">
+                    <thead>
+                      <tr>
+                        <th>Product</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Stock (Total / Left)</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="admin-shop-table-body">
+                      <!-- Javascript populated -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB CONTENT: SNAIL MAIL -->
+            <div class="admin-tab-content" id="admin-tab-snail">
+              <div class="admin-subtabs" id="admin-snail-subtabs">
+                <button type="button" class="admin-subtab is-active" data-subtab="admin-sub-snail-members">👥 Members</button>
+                <button type="button" class="admin-subtab" data-subtab="admin-sub-snail-pricing">💷 Pricing</button>
+                <button type="button" class="admin-subtab" data-subtab="admin-sub-snail-archive">📸 Visual Archive</button>
+                <button type="button" class="admin-subtab" data-subtab="admin-sub-snail-reviews">💌 Testimonials</button>
+              </div>
+
+              <!-- Pricing -->
+              <div id="admin-sub-snail-pricing" class="admin-subpanel">
+              <!-- Subscription price editor -->
+              <div class="admin-section-card">
+                <div class="admin-card-header-actions">
+                  <h4>Subscription Prices 💷</h4>
+                  <button type="button" class="button button-primary" id="admin-snail-prices-save">Save Prices ✓</button>
+                </div>
+                <p style="font-size:0.88rem; color:var(--mist); margin:0 0 14px;">Set the monthly price for each Snail Mail plan. Saving updates the live subscription page instantly.</p>
+                <div id="admin-snail-prices-list"></div>
+                <div id="admin-snail-prices-msg" style="margin-top:10px; color:var(--aurora-teal); font-size:0.88rem; min-height:1.1em;"></div>
+              </div>
+              </div>
+
+              <!-- Members -->
+              <div id="admin-sub-snail-members" class="admin-subpanel is-active">
+              <div class="admin-section-card">
+                <div class="admin-card-header-actions">
+                  <h4>Snail Mail Members Sheet</h4>
+                  <div class="admin-header-buttons">
+                    <button type="button" class="button button-secondary" id="admin-print-stickers-btn">Print Address Stickers 🖨️</button>
+                    <button type="button" class="button button-primary" id="admin-export-csv-btn">Export Member Sheet (CSV) 📊</button>
+                  </div>
+                </div>
+
+                <!-- Members Stats Panel -->
+                <div class="admin-stats-panel" style="display: flex; gap: 20px; margin-bottom: 20px; flex-wrap: wrap;">
+                  <div class="admin-stat-card" style="flex: 1; min-width: 150px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); padding: 12px 16px; border-radius: 8px;">
+                    <span style="font-size: 0.8rem; color: var(--mist); text-transform: uppercase; letter-spacing: 0.05em;">Total Subscribers</span>
+                    <h3 id="admin-snail-total-count" style="margin: 4px 0 0 0; font-family: var(--font-header); color: var(--gold); font-size: 1.8rem;">0</h3>
+                  </div>
+                  <div class="admin-stat-card" style="flex: 1; min-width: 150px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); padding: 12px 16px; border-radius: 8px;">
+                    <span style="font-size: 0.8rem; color: var(--mist); text-transform: uppercase; letter-spacing: 0.05em;">Active Members</span>
+                    <h3 id="admin-snail-active-count" style="margin: 4px 0 0 0; font-family: var(--font-header); color: var(--aurora-teal); font-size: 1.8rem;">0</h3>
+                  </div>
+                  <div class="admin-stat-card" style="flex: 1; min-width: 150px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); padding: 12px 16px; border-radius: 8px;">
+                    <span style="font-size: 0.8rem; color: var(--mist); text-transform: uppercase; letter-spacing: 0.05em;">Inactive Members</span>
+                    <h3 id="admin-snail-inactive-count" style="margin: 4px 0 0 0; font-family: var(--font-header); color: var(--aurora-rose); font-size: 1.8rem;">0</h3>
+                  </div>
+                </div>
+
+                <!-- Search & Control Toolbar -->
+                <div class="admin-toolbar" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 16px; flex-wrap: wrap;">
+                  <div style="flex: 1; min-width: 280px; position: relative;">
+                    <input type="text" id="admin-snail-members-search" placeholder="Search by name, email, contact number or address..." style="width: 100%; padding: 10px 14px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 4px; color: var(--gold); font-size: 0.9rem;">
+                    <span id="admin-snail-search-clear" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; color: var(--mist); display: none; font-size: 1.1rem; user-select: none;">&times;</span>
+                  </div>
+                  <button type="button" class="button button-primary" id="admin-toggle-add-member-btn" style="padding:9px 18px; font-size:0.72rem; white-space:nowrap; min-height:0;">✚ Add an offline subscriber</button>
+                </div>
+
+                <!-- Sign up a member by hand (offline sign-ups) — opens from the button above -->
+                <div id="admin-add-member-panel" style="display:none; background: rgba(201,151,42,0.07); border: 1px solid var(--glass-border); border-left: 3px solid var(--aurora-gold); border-radius: 8px; padding: 18px; margin-bottom: 18px;">
+                  <h5 style="margin: 0 0 4px; font-family: 'Fraunces', serif; font-style: italic; color: var(--stardust-full); font-size: 1.25rem;">✍️ Sign up a member by hand</h5>
+                  <p style="margin: 0 0 16px; font-size: 0.86rem; color: var(--mist); line-height: 1.5;">For walk-ins, markets &amp; offline sign-ups — add them straight to the members sheet below. They are saved as <strong>Active</strong>.</p>
+                  <form id="admin-add-member-form" class="admin-grid-form">
+                    <div class="admin-form-row col-3">
+                      <div class="admin-form-group">
+                        <label for="admin-m-name">Full Name</label>
+                        <input type="text" id="admin-m-name" required placeholder="Jane Doe">
+                      </div>
+                      <div class="admin-form-group">
+                        <label for="admin-m-email">Email Address</label>
+                        <input type="email" id="admin-m-email" required placeholder="jane@example.com">
+                      </div>
+                      <div class="admin-form-group">
+                        <label for="admin-m-contact">Contact Number</label>
+                        <input type="text" id="admin-m-contact" required placeholder="+44 7700 900011">
+                      </div>
+                    </div>
+                    <div class="admin-form-row col-3">
+                      <div class="admin-form-group">
+                        <label for="admin-m-plan">Plan</label>
+                        <select id="admin-m-plan" required>
+                          <option value="Monthly">Monthly Subscription</option>
+                          <option value="6 Months">6 Months Journey</option>
+                          <option value="12 Months">12 Months Journey</option>
+                        </select>
+                      </div>
+                      <div class="admin-form-group">
+                        <label for="admin-m-billing">Billing Rate</label>
+                        <input type="text" id="admin-m-billing" required placeholder="e.g. £18 / month, or £168 for 12 months">
+                      </div>
+                      <div class="admin-form-group">
+                        <label for="admin-m-date">Date Subscribed</label>
+                        <input type="date" id="admin-m-date" required>
+                      </div>
+                    </div>
+                    <div class="admin-form-group">
+                      <label for="admin-m-address">Shipping Address</label>
+                      <textarea id="admin-m-address" required placeholder="14 Primrose Gardens, London, NW3 4YT, United Kingdom" rows="3" style="font-family: inherit; font-size: 0.9rem;"></textarea>
+                    </div>
+                    <div style="display: flex; gap: 10px; margin-top: 10px;">
+                      <button type="submit" class="button button-primary">Save Subscriber</button>
+                      <button type="button" class="button button-secondary" id="admin-cancel-add-member-btn">Cancel</button>
+                    </div>
+                  </form>
+                </div>
+
+                <div class="admin-table-responsive">
+                  <table class="admin-table">
+                    <thead>
+                      <tr>
+                        <th class="sortable" data-sort="name" style="cursor: pointer; user-select: none;">Member <span class="sort-icon" id="sort-name-icon">↕</span></th>
+                        <th class="sortable" data-sort="email" style="cursor: pointer; user-select: none;">Email <span class="sort-icon" id="sort-email-icon">↕</span></th>
+                        <th class="sortable" data-sort="contact" style="cursor: pointer; user-select: none;">Contact <span class="sort-icon" id="sort-contact-icon">↕</span></th>
+                        <th class="sortable" data-sort="plan" style="cursor: pointer; user-select: none;">Plan <span class="sort-icon" id="sort-plan-icon">↕</span></th>
+                        <th>Billing</th>
+                        <th style="max-width: 250px;">Shipping Address</th>
+                        <th class="sortable" data-sort="dateSubscribed" style="cursor: pointer; user-select: none;">Date Subscribed <span class="sort-icon" id="sort-dateSubscribed-icon">↕</span></th>
+                        <th class="sortable" data-sort="status" style="cursor: pointer; user-select: none;">Status <span class="sort-icon" id="sort-status-icon">↕</span></th>
+                        <th style="text-align: center;">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="admin-snail-members-table-body">
+                      <!-- Javascript populated -->
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Pagination controls -->
+                <div class="admin-pagination-wrapper" style="display: flex; justify-content: space-between; align-items: center; margin-top: 16px; flex-wrap: wrap; gap: 16px; border-top: 1px solid var(--border-color); padding-top: 16px;">
+                  <div style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--mist);">
+                    <span>Show</span>
+                    <select id="admin-snail-members-page-size" style="padding: 4px 8px; background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); color: var(--gold); border-radius: 4px; cursor: pointer;">
+                      <option value="10">10</option>
+                      <option value="25" selected>25</option>
+                      <option value="50">50</option>
+                      <option value="100">100</option>
+                      <option value="200">200</option>
+                    </select>
+                    <span>entries per page</span>
+                  </div>
+                  <div id="admin-snail-pagination-info" style="font-size: 0.85rem; color: var(--mist);">
+                    Showing 1 to 25 of 0 entries
+                  </div>
+                  <div class="admin-pagination-buttons" id="admin-snail-pagination-controls" style="display: flex; gap: 4px; align-items: center;">
+                    <!-- Dynamically populated buttons -->
+                  </div>
+                </div>
+              </div>
+              </div>
+
+              <!-- Visual Archive -->
+              <div id="admin-sub-snail-archive" class="admin-subpanel">
+              <!-- Snail Mail Sliders visual items -->
+              <div class="admin-section-card">
+                <h4>Visual Archive Photos (Moons Archive Slider)</h4>
+                <form id="admin-add-snail-photo-form" class="admin-grid-form">
+                  <div class="admin-form-row col-2">
+                    <div class="admin-form-group">
+                      <label>Snapshot Image (URL or File)</label>
+                      <div class="image-upload-wrapper">
+                        <input type="text" id="admin-snail-photo-url" placeholder="assets/archive-vol.png">
+                        <input type="file" id="admin-snail-photo-file" accept="image/*">
+                      </div>
+                    </div>
+                    <div class="admin-form-group">
+                      <label>Caption Text</label>
+                      <input type="text" id="admin-snail-photo-caption" placeholder="e.g. January — Vol. 01: AUM ॐ" required>
+                    </div>
+                  </div>
+                  <button type="submit" class="button button-primary">Add Archive Snapshot</button>
+                </form>
+                <div class="admin-slider-list" id="admin-snail-photos-list">
+                  <!-- Javascript populated -->
+                </div>
+              </div>
+              </div>
+
+              <!-- Testimonials -->
+              <div id="admin-sub-snail-reviews" class="admin-subpanel">
+              <div class="admin-section-card">
+                <h4>Love & Reviews (Postcards Testimonials Slider)</h4>
+                <form id="admin-add-snail-review-form" class="admin-grid-form">
+                  <div class="admin-form-row col-2">
+                    <div class="admin-form-group">
+                      <label>Member Name / Author</label>
+                      <input type="text" id="admin-snail-review-author" placeholder="e.g. Eleanor K. 🌿" required>
+                    </div>
+                    <div class="admin-form-group">
+                      <label>Stamp Icon (Emoji)</label>
+                      <input type="text" id="admin-snail-review-stamp" placeholder="e.g. 🪷" required>
+                    </div>
+                  </div>
+                  <div class="admin-form-group">
+                    <label>Review Quote</label>
+                    <textarea id="admin-snail-review-text" placeholder="Write member quote here..." required></textarea>
+                  </div>
+                  <button type="submit" class="button button-primary">Add Postcard Review</button>
+                </form>
+                <div class="admin-slider-list" id="admin-snail-reviews-list">
+                  <!-- Javascript populated -->
+                </div>
+              </div>
+              </div>
+
+            </div>
+
+            <!-- TAB CONTENT: JOURNAL -->
+            <div class="admin-tab-content" id="admin-tab-journal">
+              <div class="admin-section-card">
+                <h4>Add an Art or Journal Entry</h4>
+                <p class="admin-form-hint" style="font-size:0.86rem;color:var(--mist);line-height:1.55;margin:-4px 0 16px;">Two kinds of post: a <strong>written entry</strong> (a motif up top, your words below), or an <strong>art&nbsp;+&nbsp;words</strong> post — pick <em>“Upload my artwork”</em> for the header and <em>“Write the entry”</em> for the words, and your handmade piece appears up top with your writing beneath it.</p>
+                <form id="admin-add-journal-form" class="admin-grid-form">
+                  <div class="admin-form-row col-3">
+                    <div class="admin-form-group">
+                      <label>Journal Title</label>
+                      <input type="text" id="admin-journal-title" placeholder="e.g. The Geometry of Silk" required>
+                    </div>
+                    <div class="admin-form-group">
+                      <label>Tag / Discipline</label>
+                      <select id="admin-journal-tag" required>
+                        <option value="Philosophy">Philosophy</option>
+                        <option value="Geometry">Geometry</option>
+                        <option value="Craft">Craft</option>
+                        <option value="Somatic">Somatic</option>
+                        <option value="Yoga">Yoga</option>
+                        <option value="Breathwork">Breathwork</option>
+                      </select>
+                    </div>
+                    <div class="admin-form-group">
+                      <label>Entry Date</label>
+                      <input type="text" id="admin-journal-date" placeholder="e.g. June 2026" required>
+                    </div>
+                  </div>
+                  <div class="admin-form-group">
+                    <label>Header — a motif, or a photo of your art</label>
+                    <div class="admin-radio-group">
+                      <label><input type="radio" name="journal-visual-type" value="vector" checked> A hand-drawn motif</label>
+                      <label><input type="radio" name="journal-visual-type" value="image"> Upload my artwork (a photo)</label>
+                    </div>
+                    <div class="image-upload-wrapper mt-8" id="journal-image-uploader-wrapper" style="display:none;">
+                      <input type="text" id="admin-journal-img-url" placeholder="assets/custom-journal.png">
+                      <input type="file" id="admin-journal-img-file" accept="image/*">
+                    </div>
+                  </div>
+                  <div class="admin-form-group">
+                    <label>The words</label>
+                    <div class="admin-radio-group">
+                      <label><input type="radio" name="journal-content-type" value="text" checked> Write the entry</label>
+                      <label><input type="radio" name="journal-content-type" value="image"> Upload a scan of a written page instead</label>
+                    </div>
+                  </div>
+                  <!-- Text essay content textarea -->
+                  <div class="admin-form-group" id="journal-text-content-wrapper">
+                    <label>Poetic Narrative / Essay Content</label>
+                    <textarea id="admin-journal-content" style="min-height: 240px;" placeholder="Write the full journal essay text..."></textarea>
+                  </div>
+                  <!-- Image content uploader -->
+                  <div class="admin-form-group" id="journal-image-content-wrapper" style="display:none;">
+                    <label>Upload Journal Entry Image Content (Base64 file or URL)</label>
+                    <div class="image-upload-wrapper">
+                      <input type="text" id="admin-journal-content-img-url" placeholder="assets/handwritten-page.png">
+                      <input type="file" id="admin-journal-content-img-file" accept="image/*">
+                    </div>
+                  </div>
+                  <button type="submit" class="button button-primary">Publish Entry</button>
+                </form>
+              </div>
+
+              <div class="admin-section-card admin-list-card">
+                <h4>Current Journal Posts</h4>
+                <input type="text" class="admin-list-search" id="admin-journal-search" placeholder="Search posts by title or tag…">
+                <div class="admin-table-responsive">
+                  <table class="admin-table">
+                    <thead>
+                      <tr>
+                        <th>Journal Entry</th>
+                        <th>Tag</th>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="admin-journal-table-body">
+                      <!-- Javascript populated -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB CONTENT: ORDERS & BOOKINGS -->
+            <div class="admin-tab-content" id="admin-tab-orders">
+              <div class="admin-subtabs" id="admin-orders-subtabs">
+                <button type="button" class="admin-subtab is-active" data-subtab="orders">📦 Shop Orders <span class="admin-subtab-n" id="subtab-orders-count">0</span></button>
+                <button type="button" class="admin-subtab" data-subtab="bookings">🎟️ Workshop Bookings <span class="admin-subtab-n" id="subtab-bookings-count">0</span></button>
+              </div>
+
+              <!-- Shop Orders Section -->
+              <div id="admin-sub-orders" class="admin-subpanel is-active">
+              <div class="admin-section-card">
+                <div class="admin-card-header-actions">
+                  <h4>Shop Purchase Orders Logs</h4>
+                  <div class="admin-header-buttons">
+                    <button type="button" class="button button-primary" id="admin-export-orders-csv-btn">Export Orders (CSV) 📊</button>
+                    <button type="button" class="button button-secondary" id="admin-clear-orders-btn" style="background:var(--aurora-rose);border-color:var(--aurora-rose);color:var(--dark-cosmos);">Clear All Orders ⚠️</button>
+                  </div>
+                </div>
+                
+                <div style="margin-bottom: 16px; position: relative;">
+                  <input type="text" id="admin-orders-search" placeholder="Search orders by customer name, email, street address, or product..." style="width: 100%; padding: 10px 14px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 4px; color: var(--gold); font-size: 0.9rem;">
+                </div>
+
+                <div id="admin-orders-controls" class="admin-list-controls"></div>
+                <div id="admin-orders-bulkbar" class="admin-bulk-bar" hidden></div>
+
+                <div class="admin-table-responsive">
+                  <table class="admin-table">
+                    <thead>
+                      <tr>
+                        <th style="width:36px;text-align:center;"><input type="checkbox" id="orders-select-all" aria-label="Select all orders on this page"></th>
+                        <th class="admin-th-sort" data-osort="date">Date</th>
+                        <th class="admin-th-sort" data-osort="name">Customer</th>
+                        <th>Email</th>
+                        <th>Mobile</th>
+                        <th>Product(s)</th>
+                        <th class="admin-th-sort" data-osort="total">Total</th>
+                        <th style="max-width: 200px;">Address</th>
+                        <th>Status</th>
+                        <th style="text-align: center;">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="admin-shop-orders-table-body">
+                      <!-- Javascript populated -->
+                    </tbody>
+                  </table>
+                </div>
+                <div id="admin-orders-pagination" class="admin-pager"></div>
+              </div>
+              </div>
+
+              <!-- Workshop Bookings Section -->
+              <div id="admin-sub-bookings" class="admin-subpanel">
+              <div class="admin-section-card">
+                <div class="admin-card-header-actions">
+                  <h4>Workshop Booking Reservations Logs</h4>
+                  <div class="admin-header-buttons">
+                    <button type="button" class="button button-primary" id="admin-export-bookings-csv-btn">Export Reservations (CSV) 📊</button>
+                    <button type="button" class="button button-secondary" id="admin-clear-bookings-btn" style="background:var(--aurora-rose);border-color:var(--aurora-rose);color:var(--dark-cosmos);">Clear All Bookings ⚠️</button>
+                  </div>
+                </div>
+
+                <div style="margin-bottom: 16px; position: relative;">
+                  <input type="text" id="admin-bookings-search" placeholder="Search reservations by customer name, email, workshop title, or notes..." style="width: 100%; padding: 10px 14px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 4px; color: var(--gold); font-size: 0.9rem;">
+                </div>
+
+                <div id="admin-bookings-controls" class="admin-list-controls"></div>
+                <div id="admin-bookings-bulkbar" class="admin-bulk-bar" hidden></div>
+
+                <div class="admin-table-responsive">
+                  <table class="admin-table">
+                    <thead>
+                      <tr>
+                        <th style="width:36px;text-align:center;"><input type="checkbox" id="bookings-select-all" aria-label="Select all reservations on this page"></th>
+                        <th class="admin-th-sort" data-bsort="date">Date Booked</th>
+                        <th class="admin-th-sort" data-bsort="name">Customer</th>
+                        <th>Email</th>
+                        <th>Mobile</th>
+                        <th>Workshop</th>
+                        <th class="admin-th-sort" data-bsort="price">Price</th>
+                        <th style="max-width: 250px;">Notes</th>
+                        <th style="text-align: center;">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="admin-workshop-bookings-table-body">
+                      <!-- Javascript populated -->
+                    </tbody>
+                  </table>
+                </div>
+                <div id="admin-bookings-pagination" class="admin-pager"></div>
+              </div>
+              </div>
+
+              <!-- Database Backup Section -->
+              <div class="admin-section-card" style="border: 1px solid var(--aurora-gold);">
+                <h4 style="color: var(--gold);">Local Database Backup & Restoration Tool</h4>
+                <p style="font-size: 0.88rem; color: var(--mist); line-height: 1.5; margin-bottom: 16px;">
+                  Since all site information (gallery photos, workshops catalog, shop items, subscribers database, journal posts, orders, and bookings) is stored directly in your browser's local cache, clearing your cache will reset the database. 
+                  Use this utility to export your entire database as a single file to keep a backup or to move it to another computer/browser.
+                </p>
+                <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
+                  <button type="button" class="button button-primary" id="admin-db-backup-btn" style="padding: 10px 18px;">💾 Download Full Database Backup</button>
+                  <div style="display: flex; align-items: center; gap: 10px; border-left: 1px solid var(--border-color); padding-left: 16px;">
+                    <label for="admin-db-restore-file" class="button button-secondary" style="margin: 0; cursor: pointer; display: inline-block;">📂 Restore Backup File</label>
+                    <input type="file" id="admin-db-restore-file" accept=".json" style="display: none;">
+                    <span id="admin-db-restore-filename" style="color: var(--mist); font-size: 0.85rem; font-style: italic;">No file selected</span>
+                    <button type="button" class="button button-primary" id="admin-db-restore-confirm-btn" style="display: none; background: var(--aurora-teal); border-color: var(--aurora-teal); color: var(--dark-cosmos);">Apply Restore 🔄</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ───────── Email Updates (people subscribed to news) ───────── -->
+            <div class="admin-tab-content" id="admin-tab-updates">
+              <div class="admin-section-card">
+                <div class="admin-card-header" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;">
+                  <h4>Email Update List</h4>
+                  <div style="display:flex;gap:12px;flex-wrap:wrap;">
+                    <button type="button" class="button button-primary" id="admin-updates-export-btn">Export Emails (CSV) 📊</button>
+                    <button type="button" class="button button-ghost" id="admin-updates-clear-btn">Clear All</button>
+                  </div>
+                </div>
+                <p style="font-size:0.88rem;color:var(--mist);line-height:1.5;margin:6px 0 14px;">
+                  Everyone who asked to be kept posted about new workshops &amp; shop pieces. Download to a spreadsheet anytime.
+                </p>
+                <div id="admin-updates-stats" style="margin-bottom:14px;"></div>
+                <div style="overflow-x:auto;">
+                  <table class="admin-table" id="admin-updates-table" style="width:100%;">
+                    <thead>
+                      <tr>
+                        <th style="text-align:left;">#</th>
+                        <th style="text-align:left;">Name</th>
+                        <th style="text-align:left;">Email</th>
+                        <th style="text-align:left;">Interested in</th>
+                        <th style="text-align:left;">Date</th>
+                        <th style="text-align:center;">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="admin-updates-table-body"><!-- JS populated --></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- ───────── Settings ───────── -->
+            <!-- TAB CONTENT: CUSTOMERS (sign-in accounts) -->
+            <div class="admin-tab-content" id="admin-tab-customers">
+              <div class="admin-section-card">
+                <div class="admin-card-header-actions">
+                  <h4>Customers &mdash; sign-in accounts <span id="admin-customers-count" class="admin-count-pill"></span></h4>
+                  <div class="admin-header-buttons">
+                    <button type="button" class="button button-primary" id="admin-customer-add-btn">+ Add customer</button>
+                  </div>
+                </div>
+                <p style="font-size:0.86rem;color:var(--mist);line-height:1.5;margin:-2px 0 14px;">Everyone with a sign-in account. View their orders &amp; bookings, set or reset a password, or pause access. <em>Snail&nbsp;Mail subscriptions are managed in the <strong>Snail Mail</strong> tab; the newsletter list lives in <strong>Email Updates</strong>.</em></p>
+                <div style="margin-bottom:14px;position:relative;">
+                  <input type="text" class="admin-list-search" id="admin-customers-search" placeholder="Search customers by name or email&hellip;" style="width:100%;padding:10px 14px;background:rgba(255,255,255,0.05);border:1px solid var(--border-color);border-radius:4px;color:var(--gold);font-size:0.9rem;">
+                </div>
+                <div class="admin-table-responsive">
+                  <table class="admin-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Joined</th>
+                        <th style="text-align:center;">Orders</th>
+                        <th>Subscription</th>
+                        <th>Status</th>
+                        <th style="text-align:center;">Manage</th>
+                      </tr>
+                    </thead>
+                    <tbody id="admin-customers-table-body"><!-- Javascript populated --></tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="admin-section-card" id="admin-customer-detail" style="display:none;"></div>
+            </div>
+
+            <!-- TAB CONTENT: SITE PROFILE -->
+            <div class="admin-tab-content" id="admin-tab-profile">
+              <div class="admin-subtabs" id="admin-profile-subtabs">
+                <button type="button" class="admin-subtab is-active" data-subtab="admin-sub-profile-text">📝 Website Text</button>
+                <button type="button" class="admin-subtab" data-subtab="admin-sub-profile-contact">📇 Contact &amp; Social</button>
+              </div>
+
+              <!-- Website Text -->
+              <div id="admin-sub-profile-text" class="admin-subpanel is-active">
+                <div class="admin-section-card">
+                  <div id="admin-profile-studio-root"></div>
+                </div>
+              </div>
+
+              <!-- Contact & Social -->
+              <div id="admin-sub-profile-contact" class="admin-subpanel">
+                <div class="admin-section-card">
+                  <div class="admin-card-header-actions">
+                    <h4>Contact &amp; Social</h4>
+                    <button type="button" class="button button-primary" id="set-contact-save">Save ✓</button>
+                  </div>
+                  <p style="font-size:0.88rem;color:var(--mist);margin:0 0 16px;">These update everywhere they appear — header, footer, and the contact page.</p>
+                  <div class="admin-grid-form">
+                    <div class="admin-form-row col-2">
+                      <div class="admin-form-group"><label for="set-email">Email address</label><input type="email" id="set-email" placeholder="hello@ubhi.in"></div>
+                      <div class="admin-form-group"><label for="set-phone">Phone (optional)</label><input type="text" id="set-phone" placeholder="+44 7700 900000"></div>
+                    </div>
+                    <div class="admin-form-group"><label for="set-address">Address / studio location</label><input type="text" id="set-address" placeholder="London, United Kingdom"></div>
+                    <div class="admin-form-row col-2">
+                      <div class="admin-form-group"><label for="set-instagram">Instagram link</label><input type="text" id="set-instagram" placeholder="https://instagram.com/ubhi.in"></div>
+                      <div class="admin-form-group"><label for="set-pinterest">Pinterest link</label><input type="text" id="set-pinterest" placeholder="https://in.pinterest.com/chelseaubhi/"></div>
+                    </div>
+                  </div>
+
+                  <h5 style="margin:22px 0 4px;font-family:'Fraunces',serif;font-style:italic;color:var(--stardust-full);font-size:1.15rem;">More social links</h5>
+                  <p style="font-size:0.84rem;color:var(--mist);margin:0 0 12px;">Add any other platforms (Facebook, TikTok, YouTube, WhatsApp…). These show in the <strong>footer</strong> at the bottom of the site — not the header. Pop an emoji in the icon box (e.g. 📘 ▶️ 💬 🎵).</p>
+                  <div id="extra-socials-list"></div>
+                  <button type="button" class="button button-secondary" id="add-extra-social" style="margin-top:6px;">✚ Add a social link</button>
+
+                  <div id="set-contact-msg" style="margin-top:14px;color:var(--aurora-teal);font-size:0.88rem;min-height:1.1em;"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="admin-tab-content" id="admin-tab-settings">
+              <div class="admin-section-card" style="max-width:540px;">
+                <h4>Server connection <span id="srv-status-pill" class="srv-pill srv-off">Not connected</span></h4>
+                <p style="font-size:0.88rem;color:var(--mist);line-height:1.5;margin:-2px 0 16px;">Connect to the Ubhi server to make your edits <strong>real and shared everywhere</strong> — saved off this browser, visible to every visitor on every device, with images hosted properly. While connected, everything you change is saved to the server automatically.</p>
+                <form id="admin-srv-form" class="admin-grid-form">
+                  <div class="admin-form-group">
+                    <label>Owner / staff email</label>
+                    <input type="email" id="srv-email" placeholder="owner@ubhi.local" autocomplete="username">
+                  </div>
+                  <div class="admin-form-group">
+                    <label>Password</label>
+                    <input type="password" id="srv-pass" placeholder="••••••••" autocomplete="current-password">
+                  </div>
+                  <p id="srv-msg" style="display:none;font-size:0.85rem;margin:0;"></p>
+                  <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                    <button type="submit" class="button button-primary">Connect</button>
+                    <button type="button" id="srv-disconnect" class="button button-secondary" style="display:none;">Disconnect</button>
+                  </div>
+                </form>
+              </div>
+              <div class="admin-section-card" style="max-width:540px;">
+                <h4>Change Admin Passcode</h4>
+                <p style="font-size:0.88rem;color:var(--mist);line-height:1.5;margin:-2px 0 18px;">This is the passcode that unlocks the Keeper's Desk. Pick something only you know — it is saved on this device.</p>
+                <form id="admin-change-pass-form" class="admin-grid-form">
+                  <div class="admin-form-group">
+                    <label>Current passcode</label>
+                    <input type="password" id="admin-current-pass" placeholder="••••••••" required>
+                  </div>
+                  <div class="admin-form-group">
+                    <label>New passcode</label>
+                    <input type="password" id="admin-new-pass" placeholder="At least 4 characters" required>
+                  </div>
+                  <div class="admin-form-group">
+                    <label>Confirm new passcode</label>
+                    <input type="password" id="admin-confirm-pass" placeholder="Repeat the new passcode" required>
+                  </div>
+                  <p id="admin-pass-msg" style="display:none;font-size:0.85rem;margin:0;"></p>
+                  <button type="submit" class="button button-primary">Update Passcode</button>
+                </form>
+              </div>
+
+              <div class="admin-section-card" style="max-width:540px; border-left:3px solid var(--aurora-rose);">
+                <h4>Reset to fresh data</h4>
+                <p style="font-size:0.88rem;color:var(--mist);line-height:1.5;margin:-2px 0 14px;">If the saved data ever gets into a strange state, this wipes <strong>all</strong> content stored in this browser — orders, bookings, members, subscribers, and any workshops, products or posts you've added — and restores the original sample content. Your passcode is kept. <strong>This cannot be undone</strong>, so download a backup first (Orders &amp; Bookings → Database Backup) if you might want the data back.</p>
+                <button type="button" class="button button-secondary" id="admin-reset-data-btn" style="background:var(--aurora-rose);border-color:var(--aurora-rose);color:#fff;padding:9px 18px;font-size:0.72rem;min-height:0;">Reset to fresh data ⚠️</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
