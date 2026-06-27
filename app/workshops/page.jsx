@@ -1,5 +1,5 @@
-import RoutePage from '../../src/components/RoutePage';
+import { PageWorkshops } from '../../src/generated-site';
 
 export default function WorkshopsPage() {
-  return <RoutePage fragmentName="page-workshops" />;
+  return <PageWorkshops />;
 }

@@ -1,5 +1,5 @@
-import RoutePage from '../../src/components/RoutePage';
+import { PageShop } from '../../src/generated-site';
 
 export default function ShopPage() {
-  return <RoutePage fragmentName="page-shop" />;
+  return <PageShop />;
 }

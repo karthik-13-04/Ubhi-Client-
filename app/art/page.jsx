@@ -1,5 +1,5 @@
-import RoutePage from '../../src/components/RoutePage';
+import { PageArt } from '../../src/generated-site';
 
 export default function ArtPage() {
-  return <RoutePage fragmentName="page-art" />;
+  return <PageArt />;
 }

@@ -1,5 +1,5 @@
-import RoutePage from '../../src/components/RoutePage';
+import { PageContact } from '../../src/generated-site';
 
 export default function ContactPage() {
-  return <RoutePage fragmentName="page-contact" />;
+  return <PageContact />;
 }

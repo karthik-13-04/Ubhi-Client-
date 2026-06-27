@@ -67,6 +67,7 @@ const mounts = [
   ['/api/workshops', './routes/workshops'],
   ['/api/shop', './routes/shop'],
   ['/api/gallery', './routes/gallery'],
+  ['/api/artworks', './routes/artworks'],
   ['/api/journal', './routes/journal'],
   ['/api/subscribers', './routes/subscribers'],
   ['/api/updates', './routes/updates'],
@@ -98,12 +99,19 @@ async function start() {
     await store.initialize();
   }
 
-  app.listen(config.PORT, () => {
-    // eslint-disable-next-line no-console
-    console.log(
-      `[server] Ubhi backend listening on http://localhost:${config.PORT} ` +
-        `(store: ${store.kind}, env: ${config.NODE_ENV})`
-    );
+  return new Promise((resolve, reject) => {
+    const server = app.listen(config.PORT, () => {
+      // eslint-disable-next-line no-console
+      console.log(
+        `[server] Ubhi backend listening on http://localhost:${config.PORT} ` +
+          `(store: ${store.kind}, env: ${config.NODE_ENV})`
+      );
+      resolve(server);
+    });
+
+    server.on('error', (err) => {
+      reject(err);
+    });
   });
 }
 

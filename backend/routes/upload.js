@@ -12,17 +12,13 @@
 'use strict';
 
 const express = require('express');
-const path = require('path');
-const fs = require('fs');
 const crypto = require('crypto');
 const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
+const { store } = require('../db/store');
 
 const router = express.Router();
 const { requireAuth } = require('../middleware/auth');
 const config = require('../config');
-
-const UPLOAD_DIR = path.join(__dirname, '..', 'uploads');
-if (!fs.existsSync(UPLOAD_DIR)) fs.mkdirSync(UPLOAD_DIR, { recursive: true });
 
 const bigJson = express.json({ limit: '16mb' });
 const storageHost = (config.AWS_S3_DOMAIN || '').split('/')[0];
@@ -65,8 +61,21 @@ router.post('/', requireAuth, bigJson, async (req, res, next) => {
         ContentType: mime,
       })
     );
+    const url = `https://${storageHost}/${config.AWS_BUCKET_NAME}/uploads/${name}`;
+    const media = await store.insert('media_library', {
+      kind: 'image',
+      url,
+      storage_key: `uploads/${name}`,
+      mime_type: mime,
+      size_bytes: buf.length,
+      original_name: req.body && req.body.originalName ? String(req.body.originalName).trim() : name,
+      alt_text: req.body && req.body.altText ? String(req.body.altText).trim() : '',
+      title: req.body && req.body.title ? String(req.body.title).trim() : '',
+      uploaded_by: req.user && req.user.id ? req.user.id : null,
+    });
     res.json({
-      url: `https://${storageHost}/${config.AWS_BUCKET_NAME}/uploads/${name}`,
+      url,
+      media,
       ok: true,
     });
   } catch (err) {

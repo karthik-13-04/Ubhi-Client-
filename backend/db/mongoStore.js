@@ -23,6 +23,35 @@ class MongoStore {
         if (table === 'settings' || table === 'app_state') {
           await this._ensureIndex(collection, { key: 1 }, { unique: true, sparse: true });
         }
+        if (table === 'artworks') {
+          await this._ensureIndex(collection, { slug: 1 }, { unique: true, sparse: true });
+          await this._ensureIndex(collection, { status: 1, published_at: -1 });
+          await this._ensureIndex(collection, { is_featured: 1, sort_order: 1 });
+        }
+        if (table === 'artwork_images') {
+          await this._ensureIndex(collection, { artwork_id: 1, sort_order: 1 });
+        }
+        if (table === 'artwork_collections') {
+          await this._ensureIndex(collection, { slug: 1 }, { unique: true, sparse: true });
+          await this._ensureIndex(collection, { sort_order: 1 });
+        }
+        if (table === 'artwork_collection_map') {
+          await this._ensureIndex(collection, { artwork_id: 1, collection_id: 1 }, { unique: true });
+        }
+        if (table === 'artwork_tags') {
+          await this._ensureIndex(collection, { artwork_id: 1, value: 1 }, { unique: true });
+        }
+        if (table === 'artwork_inquiries') {
+          await this._ensureIndex(collection, { artwork_id: 1, created_at: -1 });
+          await this._ensureIndex(collection, { status: 1, created_at: -1 });
+        }
+        if (table === 'artwork_revisions') {
+          await this._ensureIndex(collection, { artwork_id: 1, created_at: -1 });
+        }
+        if (table === 'media_library') {
+          await this._ensureIndex(collection, { url: 1 }, { unique: true, sparse: true });
+          await this._ensureIndex(collection, { created_at: -1 });
+        }
       })
     );
   }

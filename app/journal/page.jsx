@@ -1,5 +1,5 @@
-import RoutePage from '../../src/components/RoutePage';
+import { PageJournal } from '../../src/generated-site';
 
 export default function JournalPage() {
-  return <RoutePage fragmentName="page-journal" />;
+  return <PageJournal />;
 }

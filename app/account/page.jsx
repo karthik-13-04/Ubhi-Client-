@@ -1,5 +1,5 @@
-import RoutePage from '../../src/components/RoutePage';
+import { PageAccount } from '../../src/generated-site';
 
 export default function AccountPage() {
-  return <RoutePage fragmentName="page-account" />;
+  return <PageAccount />;
 }

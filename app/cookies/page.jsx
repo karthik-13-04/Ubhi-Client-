@@ -1,5 +1,5 @@
-import RoutePage from '../../src/components/RoutePage';
+import { PageCookies } from '../../src/generated-site';
 
 export default function CookiesPage() {
-  return <RoutePage fragmentName="page-cookies" />;
+  return <PageCookies />;
 }

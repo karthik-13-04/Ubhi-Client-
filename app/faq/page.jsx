@@ -1,5 +1,5 @@
-import RoutePage from '../../src/components/RoutePage';
+import { PageFaq } from '../../src/generated-site';
 
 export default function FaqPage() {
-  return <RoutePage fragmentName="page-faq" />;
+  return <PageFaq />;
 }

@@ -1,5 +1,5 @@
-import RoutePage from '../../src/components/RoutePage';
+import { PagePrivacy } from '../../src/generated-site';
 
 export default function PrivacyPage() {
-  return <RoutePage fragmentName="page-privacy" />;
+  return <PagePrivacy />;
 }

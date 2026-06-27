@@ -1,5 +1,5 @@
-import RoutePage from '../../src/components/RoutePage';
+import { PageAbout } from '../../src/generated-site';
 
 export default function AboutPage() {
-  return <RoutePage fragmentName="page-about" />;
+  return <PageAbout />;
 }

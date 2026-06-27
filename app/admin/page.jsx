@@ -1,10 +1,10 @@
-import RoutePage from '../../src/components/RoutePage';
 import AdminProfileStudio from '../../src/components/AdminProfileStudio';
+import { PageAdmin } from '../../src/generated-site';
 
 export default function AdminPage() {
   return (
     <>
-      <RoutePage fragmentName="page-admin" />
+      <PageAdmin />
       <AdminProfileStudio />
     </>
   );

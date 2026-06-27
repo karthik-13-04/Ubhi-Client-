@@ -1,5 +1,5 @@
-import RoutePage from '../src/components/RoutePage';
+import { Page404 } from '../src/generated-site';
 
 export default function NotFound() {
-  return <RoutePage fragmentName="page-404" />;
+  return <Page404 />;
 }

@@ -1,5 +1,5 @@
-import RoutePage from '../../src/components/RoutePage';
+import { PageShipping } from '../../src/generated-site';
 
 export default function ShippingPage() {
-  return <RoutePage fragmentName="page-shipping" />;
+  return <PageShipping />;
 }

@@ -1,5 +1,5 @@
-import RoutePage from '../src/components/RoutePage';
+import { PageHome } from '../src/generated-site';
 
 export default function HomePage() {
-  return <RoutePage fragmentName="page-home" />;
+  return <PageHome />;
 }

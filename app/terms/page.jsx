@@ -1,5 +1,5 @@
-import RoutePage from '../../src/components/RoutePage';
+import { PageTerms } from '../../src/generated-site';
 
 export default function TermsPage() {
-  return <RoutePage fragmentName="page-terms" />;
+  return <PageTerms />;
 }

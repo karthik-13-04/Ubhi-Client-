@@ -1,5 +1,5 @@
-import RoutePage from '../../src/components/RoutePage';
+import { PageRefunds } from '../../src/generated-site';
 
 export default function RefundsPage() {
-  return <RoutePage fragmentName="page-refunds" />;
+  return <PageRefunds />;
 }

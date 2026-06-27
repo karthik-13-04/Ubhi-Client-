@@ -1,0 +1,66 @@
+export default function PageTerms() {
+  return (
+    <div id="page-terms" className="page legal-page">
+      <div className="legal-wrap">
+        <p className="eyebrow">
+          the fine print
+        </p>
+        <h1>
+          Terms &amp; Conditions
+        </h1>
+        <p className="legal-meta">
+          Last updated June 2026
+        </p>
+        <p className="legal-note">
+          ⚠️ Placeholder — replace with final, ideally solicitor-reviewed text before launch.
+        </p>
+        <div className="legal-body">
+          <h3>
+            About these terms
+          </h3>
+          <p>
+            By using ubhi.in or buying from us, you agree to these terms.
+          </p>
+          <h3>
+            Orders &amp; pricing
+          </h3>
+          <p>
+            All prices are in GBP and include VAT where applicable. We may decline or cancel an order; if we do, you'll be refunded in full.
+          </p>
+          <h3>
+            Workshops
+          </h3>
+          <p>
+            Booking confirms your place subject to availability. See 
+            <a href="/refunds#refunds" data-page-link="refunds">
+              Returns &amp; Refunds
+            </a>
+             for the cancellation policy. Workshops involve movement; please tell us about any health conditions.
+          </p>
+          <h3>
+            Snail Mail subscriptions
+          </h3>
+          <p>
+            Subscriptions renew automatically each billing period until cancelled. You can cancel any time from 
+            <a href="/account#account" data-page-link="account">
+              Your Almanac
+            </a>
+            , effective at the end of the current paid period.
+          </p>
+          <h3>
+            Intellectual property
+          </h3>
+          <p>
+            All artwork, writing and imagery remain the property of Chelsea Kaur Ubhi and may not be reproduced without permission.
+          </p>
+          <h3>
+            Liability &amp; governing law
+          </h3>
+          <p>
+            Nothing here limits your statutory rights. These terms are governed by the laws of England &amp; Wales.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
