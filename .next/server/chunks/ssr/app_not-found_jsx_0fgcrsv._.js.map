@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../../app/not-found.jsx"],"sourcesContent":["import { Page404 } from '../src/generated-site';\r\n\r\nexport default function NotFound() {\r\n  return <Page404 />;\r\n}\r\n"],"names":[],"mappings":"uDAAA,EAAA,CAAA,CAAA,6CAEe,SAAS,EACtB,MAAO,CAAA,EAAA,EAAA,GAAA,EAAC,EAAA,OAAO,CAAA,CAAA,EACjB"}

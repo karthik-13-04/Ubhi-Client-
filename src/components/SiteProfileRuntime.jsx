@@ -8,7 +8,8 @@ const LEGACY_TEXT_KEY = 'ubhi-text-content';
 const SITE_SETTINGS_KEY = 'ubhi-site-settings';
 
 const EDITABLE_SELECTOR =
-  'h1,h2,h3,h4,h5,h6,p,li,blockquote,summary,figcaption,.eyebrow,.nav-links a,.nav-cta,.site-footer a,.site-footer h4';
+  'h1,h2,h3,h4,h5,h6,p,li,blockquote,summary,figcaption,.eyebrow,' +
+  'a,button,label,span,strong,em,.nav-links a,.nav-cta,.site-footer a,.site-footer h4';
 
 const EXCLUDE_SELECTOR =
   '#page-admin,#page-account,.modal,[data-noedit],[contenteditable],script,style,' +
@@ -66,10 +67,18 @@ function makeKey(routeId, tag, text, used) {
   return key;
 }
 
+function hasBlockChildren(el) {
+  return Array.from(el.children).some((child) => {
+    const style = window.getComputedStyle(child);
+    return !['inline', 'inline-block', 'inline-flex', 'contents'].includes(style.display);
+  });
+}
+
 function isEditable(el) {
   if (!el || el.closest(EXCLUDE_SELECTOR)) return false;
   if (!(el.textContent || '').trim()) return false;
-  if (el.children.length === 0) return true;
+  if (el.querySelector(EXCLUDE_SELECTOR)) return false;
+  if (!hasBlockChildren(el)) return true;
   return /^H[1-6]$/.test(el.tagName) || el.classList.contains('eyebrow');
 }
 
@@ -164,19 +173,47 @@ export default function SiteProfileRuntime() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const run = () => applyProfile(pathname || '/');
+    let apiProfile = null;
+    const run = () => applyProfile(pathname || '/', apiProfile);
+    
+    const fetchProfile = async () => {
+      try {
+        const res = await fetch('/api/content');
+        if (res.ok) {
+          const data = await res.json();
+          if (data && (data.text || data.styles)) {
+             apiProfile = data;
+          }
+        }
+      } catch (err) {
+        console.error('Failed to load dynamic profile data', err);
+      }
+      run();
+    };
+
     const onStorage = (event) => {
       if (!event.key || event.key === STORE_KEY) run();
     };
     const onCustom = () => run();
+
+    fetchProfile();
+
+    if (typeof window !== 'undefined') {
+      if (typeof window.refreshUI === 'function') {
+        window.refreshUI();
+      } else if (typeof window.renderHomeGallery === 'function') {
+        window.renderHomeGallery();
+      }
+    }
+
+    window.addEventListener('storage', onStorage);
+    window.addEventListener('ubhi-profile-update', onCustom);
     const onPreview = (event) => {
       const payload = event.data;
       if (!payload || payload.type !== 'ubhi-preview-profile') return;
       applyProfile(pathname || '/', payload.profile);
     };
 
-    run();
-    window.addEventListener('storage', onStorage);
     window.addEventListener('ubhi:site-profile-updated', onCustom);
     window.addEventListener('message', onPreview);
 

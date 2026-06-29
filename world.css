@@ -566,7 +566,7 @@ select option { background: var(--paper-cream); color: var(--ink-soft); }
    Clears the masthead from under the fixed header, drops the glass
    (also the capture/perf hog), and removes shopfront chrome that has
    no business back-of-house. No controls removed — layout only. */
-.admin-dashboard-wrapper { padding: clamp(104px, 12vh, 124px) clamp(16px, 2vw, 36px) 40px !important; }
+.admin-dashboard-wrapper { padding: clamp(40px, 6vh, 64px) clamp(16px, 2vw, 36px) 40px !important; }
 #page-admin *, .admin-gate-wrapper, .admin-dashboard-wrapper {
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;

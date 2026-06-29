@@ -275,10 +275,12 @@ function navigate(hash, scrollToBooking = false) {
   if (pageId === "page-home") {
     startParticles();
     // Re-observe home reveals for scroll-based animation
-    target.querySelectorAll(".reveal").forEach((el) => {
-      el.classList.remove("is-visible");
-      revealObserver.observe(el);
-    });
+    if (target) {
+      target.querySelectorAll(".reveal").forEach((el) => {
+        el.classList.remove("is-visible");
+        revealObserver.observe(el);
+      });
+    }
   } else {
     stopParticles();
     triggerInnerPageReveals(target);
@@ -3087,42 +3089,48 @@ let adminJournalSearch = "";
 // --- 3. Dynamic Front-Facing Page Renderers ---
 
 function renderHomeGallery() {
-  const container = document.getElementById("home-gallery-container");
-  if (!container) return;
   const items = dbRead("gallery-items", []);
-  
-  if (items.length === 0) {
-    container.innerHTML = `<p style="padding:40px;text-align:center;color:var(--mist);">No gallery images yet.</p>`;
-    return;
+  const container = document.getElementById("home-gallery-container");
+  const rotator = document.querySelector(".hero-art-rotator");
+
+  if (container) {
+    if (items.length === 0) {
+      container.innerHTML = `<p style="padding:40px;text-align:center;color:var(--mist);">No gallery images yet.</p>`;
+    } else {
+      const makeTrackHTML = () => {
+        return items.map((item, idx) => `
+          <div class="gallery-item">
+            <img src="${esc(item.src)}" alt="${esc(item.alt)}" />
+          </div>
+          <div class="gallery-separator" aria-hidden="true">
+            <span class="sep-om">ॐ</span>
+            <span class="sep-eye">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10" stroke="var(--aurora-teal)" stroke-width="0.8" fill="rgba(45,139,124,0.05)"/>
+                <circle cx="12" cy="12" r="6" fill="#1f4ba6"/>
+                <circle cx="12" cy="12" r="3" fill="#000000"/>
+                <circle cx="10.8" cy="10.8" r="1" fill="#ffffff"/>
+              </svg>
+            </span>
+          </div>
+        `).join("");
+      };
+      container.innerHTML = `
+        <div class="gallery-track">
+          ${makeTrackHTML()}
+        </div>
+        <div class="gallery-track" aria-hidden="true">
+          ${makeTrackHTML()}
+        </div>
+      `;
+    }
   }
 
-  const makeTrackHTML = () => {
-    return items.map((item, idx) => `
-      <div class="gallery-item">
-        <img src="${esc(item.src)}" alt="${esc(item.alt)}" />
-      </div>
-      <div class="gallery-separator" aria-hidden="true">
-        <span class="sep-om">ॐ</span>
-        <span class="sep-eye">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="12" cy="12" r="10" stroke="var(--aurora-teal)" stroke-width="0.8" fill="rgba(45,139,124,0.05)"/>
-            <circle cx="12" cy="12" r="6" fill="#1f4ba6"/>
-            <circle cx="12" cy="12" r="3" fill="#000000"/>
-            <circle cx="10.8" cy="10.8" r="1" fill="#ffffff"/>
-          </svg>
-        </span>
-      </div>
+  if (rotator && items.length > 0) {
+    rotator.innerHTML = items.map((item, idx) => `
+      <img class="hero-art-slide ${idx === 0 ? 'is-active' : ''}" src="${esc(item.src)}" alt="${esc(item.alt)}" ${idx === 0 ? 'fetchPriority="high"' : 'loading="lazy"'} decoding="async" />
     `).join("");
-  };
-
-  container.innerHTML = `
-    <div class="gallery-track">
-      ${makeTrackHTML()}
-    </div>
-    <div class="gallery-track" aria-hidden="true">
-      ${makeTrackHTML()}
-    </div>
-  `;
+  }
 
   // Keep the dedicated Art Portfolio page in sync with the same gallery store.
   if (typeof renderArtPortfolio === "function") renderArtPortfolio();

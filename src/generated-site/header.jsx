@@ -1,3 +1,5 @@
+'use client';
+
 export default function Header() {
   return (
     <header className="site-header" data-header="">
@@ -8,28 +10,28 @@ export default function Header() {
         </span>
       </a>
       <nav className="nav-links" aria-label="Primary navigation">
-        <a href="#home" data-page="home">
+        <a href="/#home" data-page="home">
           Home
         </a>
-        <a href="#snail-mail" data-page="snail-mail">
+        <a href="/snail-mail#snail-mail" data-page="snail-mail">
           Snail Mail
         </a>
-        <a href="#art" data-page="art">
+        <a href="/art#art" data-page="art">
           Art Portfolio
         </a>
-        <a href="#shop" data-page="shop">
+        <a href="/shop#shop" data-page="shop">
           Shop
         </a>
-        <a href="#workshops" data-page="workshops">
+        <a href="/workshops#workshops" data-page="workshops">
           Workshops
         </a>
-        <a href="#journal" data-page="journal">
+        <a href="/journal#journal" data-page="journal">
           Journal
         </a>
-        <a href="#about" data-page="about">
+        <a href="/about#about" data-page="about">
           About
         </a>
-        <a href="#account" data-page-link="account" className="nav-mobile-only">
+        <a href="/account#account" data-page-link="account" className="nav-mobile-only">
           Sign in
         </a>
         <div className="nav-social" aria-label="Find us">
@@ -77,7 +79,10 @@ export default function Header() {
             Sign in
           </span>
         </a>
-        <a className="nav-cta" href="#workshops" data-goto-booking="">
+        <a className="nav-cta" href="#workshops" onClick={(e) => {
+          e.preventDefault();
+          window.ubhiOpenModal?.('booking');
+        }}>
           Reserve a space
         </a>
         <button className="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-nav-toggle="">

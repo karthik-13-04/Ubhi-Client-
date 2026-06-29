@@ -36,7 +36,7 @@ const pageComponents = {
 };
 
 async function renderComponentToHtml(PageComponent) {
-  const stream = await renderToReadableStream(createElement(PageComponent));
+  const stream = await renderToReadableStream(createElement(PageComponent, { isApiRoute: true }));
   return new Response(stream).text();
 }
 

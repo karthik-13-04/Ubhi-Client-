@@ -76,9 +76,7 @@ export default function RootLayout({ children }) {
         </main>
         <Footer />
         <Overlays />
-        <Script id="ubhi-route-hash" strategy="beforeInteractive">
-          {hashBootstrap}
-        </Script>
+        <script dangerouslySetInnerHTML={{ __html: hashBootstrap }} />
         <Script src="/assets/api.js" strategy="afterInteractive" />
         <Script src="/script.js?v=1.7.0" strategy="afterInteractive" />
         <Script src="/world.js?v=1.7.0" strategy="afterInteractive" />

@@ -67,14 +67,16 @@
 
     var tx = 0, ty = 0, cx = 0, cy = 0, raf = null;
     function loop() {
-      cx += (tx - cx) * 0.08;
-      cy += (ty - cy) * 0.08;
+      cx += (tx - cx) * 0.18;
+      cy += (ty - cy) * 0.18;
       layers.forEach(function (l) {
         var d = parseFloat(l.getAttribute('data-depth')) || 10;
+        var mx = Math.max(-18, Math.min(18, -cx * d));
+        var my = Math.max(-18, Math.min(18, -cy * d));
         // use the `translate` property so CSS `transform: rotate()` survives
-        l.style.translate = (-cx * d) + 'px ' + (-cy * d) + 'px';
+        l.style.translate = mx.toFixed(2) + 'px ' + my.toFixed(2) + 'px';
       });
-      if (Math.abs(tx - cx) > 0.001 || Math.abs(ty - cy) > 0.001) {
+      if (Math.abs(tx - cx) > 0.002 || Math.abs(ty - cy) > 0.002) {
         raf = requestAnimationFrame(loop);
       } else { raf = null; }
     }

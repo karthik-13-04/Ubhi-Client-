@@ -5,16 +5,17 @@
   "scripts": {
     "clean": "node -e \"require('fs').rmSync('.next', { recursive: true, force: true })\"",
     "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
-    "dev:frontend": "npm run clean && next dev --webpack",
+    "dev:frontend": "next dev --webpack",
     "dev:backend": "node backend/start-dev.js",
-    "build": "npm run clean && next build --webpack",
+    "build": "next build --webpack",
     "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
     "start:frontend": "next start",
     "start:backend": "node backend/server.js",
     "seed": "node backend/db/seed.js"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.883.0",
+    "@aws-sdk/client-s3": "^3.1075.0",
+    "@aws-sdk/s3-request-presigner": "^3.1075.0",
     "bcryptjs": "^2.4.3",
     "concurrently": "^9.2.1",
     "cors": "^2.8.5",

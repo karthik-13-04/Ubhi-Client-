@@ -5514,6 +5514,113 @@ details p { margin: 14px 0 4px; font-size: 0.96rem; }
   opacity: 1;
 }
 
+.admin-gallery-toolbar {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) minmax(150px, 220px);
+  gap: 12px;
+  margin: 12px 0 16px;
+}
+
+.admin-gallery-toolbar select,
+.admin-gallery-edit input,
+#admin-gallery-status {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--gold);
+}
+
+.admin-gallery-list {
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+.admin-gallery-card {
+  aspect-ratio: auto;
+  display: grid;
+  grid-template-rows: 190px auto auto;
+  border-color: var(--border-color);
+  background: rgba(60, 42, 28, 0.42);
+}
+
+.admin-gallery-card.is-draft {
+  opacity: 0.72;
+  border-style: dashed;
+}
+
+.admin-gallery-select {
+  position: absolute;
+  z-index: 3;
+  top: 10px;
+  left: 10px;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(20, 15, 10, 0.72);
+  border: 1px solid rgba(255,255,255,0.18);
+}
+
+.admin-gallery-select input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--aurora-teal);
+}
+
+.admin-gallery-thumb {
+  position: relative;
+  min-height: 0;
+}
+
+.admin-gallery-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.admin-gallery-status {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: rgba(45, 139, 124, 0.9);
+  color: #fff;
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.admin-gallery-card.is-draft .admin-gallery-status {
+  background: rgba(161, 78, 94, 0.9);
+}
+
+.admin-gallery-edit {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+}
+
+.admin-gallery-edit label {
+  display: grid;
+  gap: 6px;
+  color: var(--mist);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.admin-gallery-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px 14px;
+}
+
 .delete-overlay {
   position: absolute;
   inset: 0;

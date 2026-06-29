@@ -1,3 +1,5 @@
+import { ArtPortfolioList } from '../components/ClientLists';
+
 export default function PageArt() {
   return (
     <div id="page-art" className="page">
@@ -186,7 +188,9 @@ export default function PageArt() {
             .
           </p>
         </div>
-        <div className="art-portfolio-grid" id="art-portfolio-container"></div>
+        <div className="art-portfolio-grid" id="art-portfolio-container">
+          <ArtPortfolioList />
+        </div>
       </section>
     </div>
   );

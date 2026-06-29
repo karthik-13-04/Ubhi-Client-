@@ -566,7 +566,7 @@ select option { background: var(--paper-cream); color: var(--ink-soft); }
    Clears the masthead from under the fixed header, drops the glass
    (also the capture/perf hog), and removes shopfront chrome that has
    no business back-of-house. No controls removed — layout only. */
-.admin-dashboard-wrapper { padding: clamp(104px, 12vh, 124px) clamp(16px, 2vw, 36px) 40px !important; }
+.admin-dashboard-wrapper { padding: clamp(40px, 6vh, 64px) clamp(16px, 2vw, 36px) 40px !important; }
 #page-admin *, .admin-gate-wrapper, .admin-dashboard-wrapper {
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
@@ -858,4 +858,122 @@ input[type="file"]::file-selector-button:hover { background: var(--ochre); color
   .preview-card:nth-child(2n), .preview-card:nth-child(3n) { transform: none; }
   body { background-attachment: scroll; }
   body::before { background-attachment: scroll; }
+}
+
+/* Admin gallery manager — final-layer overrides so Current Gallery Images
+   stays a compact control panel instead of stretching into full-page photos. */
+#page-admin #admin-tab-gallery .admin-list-card {
+  overflow: visible;
+}
+
+#page-admin #admin-tab-gallery .admin-gallery-toolbar {
+  display: grid !important;
+  grid-template-columns: minmax(220px, 1fr) minmax(150px, 220px);
+  gap: 12px;
+  margin: 12px 0 16px;
+}
+
+#page-admin #admin-tab-gallery .admin-gallery-list {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)) !important;
+  gap: 14px !important;
+}
+
+#page-admin #admin-tab-gallery .admin-gallery-card {
+  position: relative;
+  display: grid !important;
+  grid-template-rows: 160px auto auto;
+  aspect-ratio: auto !important;
+  overflow: hidden;
+  border: 1px solid rgba(120, 96, 60, 0.24);
+  border-radius: 8px;
+  background: rgba(255, 252, 243, 0.72);
+  box-shadow: 0 12px 28px -24px rgba(60, 42, 28, 0.55);
+}
+
+#page-admin #admin-tab-gallery .admin-gallery-thumb {
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+  background: rgba(60, 42, 28, 0.08);
+}
+
+#page-admin #admin-tab-gallery .admin-gallery-thumb img,
+#page-admin #admin-tab-gallery .admin-gallery-card > img {
+  width: 100% !important;
+  height: 160px !important;
+  max-height: 160px !important;
+  object-fit: cover !important;
+  display: block;
+}
+
+#page-admin #admin-tab-gallery .admin-gallery-edit {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+}
+
+#page-admin #admin-tab-gallery .admin-gallery-edit label {
+  display: grid;
+  gap: 5px;
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--mist);
+}
+
+#page-admin #admin-tab-gallery .admin-gallery-edit input,
+#page-admin #admin-tab-gallery .admin-gallery-toolbar select,
+#page-admin #admin-gallery-status {
+  width: 100%;
+  min-height: 34px;
+  padding: 8px 10px;
+  border: 1px solid rgba(120, 96, 60, 0.22);
+  border-radius: 6px;
+  background: rgba(255, 252, 243, 0.9);
+  color: var(--ink);
+}
+
+#page-admin #admin-tab-gallery .admin-gallery-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px 12px;
+}
+
+#page-admin #admin-tab-gallery .admin-gallery-status {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: rgba(45, 139, 124, 0.92);
+  color: #fff;
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+#page-admin #admin-tab-gallery .admin-gallery-card.is-draft {
+  opacity: 0.76;
+  border-style: dashed;
+}
+
+#page-admin #admin-tab-gallery .admin-gallery-card.is-draft .admin-gallery-status {
+  background: rgba(161, 78, 94, 0.92);
+}
+
+#page-admin #admin-tab-gallery .admin-gallery-select {
+  position: absolute;
+  z-index: 3;
+  top: 10px;
+  left: 10px;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: rgba(60, 42, 28, 0.75);
 }
