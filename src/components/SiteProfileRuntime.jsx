@@ -169,20 +169,55 @@ function applyProfile(pathname, previewPayload) {
   } catch {}
 }
 
+function scheduleIdleTask(callback) {
+  if (typeof window === 'undefined') return null;
+  if (typeof window.requestIdleCallback === 'function') {
+    return window.requestIdleCallback(callback, { timeout: 400 });
+  }
+  return window.setTimeout(callback, 0);
+}
+
+function cancelIdleTask(handle) {
+  if (typeof window === 'undefined') return;
+  if (typeof window.cancelIdleCallback === 'function' && typeof handle === 'number') {
+    window.cancelIdleCallback(handle);
+  } else if (handle) {
+    window.clearTimeout(handle);
+  }
+}
+
 export default function SiteProfileRuntime() {
   const pathname = usePathname();
 
   useEffect(() => {
     let apiProfile = null;
-    const run = () => applyProfile(pathname || '/', apiProfile);
-    
+    let idleHandle = null;
+    let isActive = true;
+
+    const run = (payload = apiProfile) => {
+      if (!isActive) return;
+      if (idleHandle) cancelIdleTask(idleHandle);
+      idleHandle = scheduleIdleTask(() => {
+        if (!isActive) return;
+        applyProfile(pathname || '/', payload);
+
+        if (typeof window !== 'undefined') {
+          if (typeof window.refreshUI === 'function') {
+            window.refreshUI();
+          } else if (typeof window.renderHomeGallery === 'function') {
+            window.renderHomeGallery();
+          }
+        }
+      });
+    };
+
     const fetchProfile = async () => {
       try {
         const res = await fetch('/api/content');
         if (res.ok) {
           const data = await res.json();
           if (data && (data.text || data.styles)) {
-             apiProfile = data;
+            apiProfile = data;
           }
         }
       } catch (err) {
@@ -196,15 +231,8 @@ export default function SiteProfileRuntime() {
     };
     const onCustom = () => run();
 
+    run();
     fetchProfile();
-
-    if (typeof window !== 'undefined') {
-      if (typeof window.refreshUI === 'function') {
-        window.refreshUI();
-      } else if (typeof window.renderHomeGallery === 'function') {
-        window.renderHomeGallery();
-      }
-    }
 
     window.addEventListener('storage', onStorage);
     window.addEventListener('ubhi-profile-update', onCustom);
@@ -218,6 +246,8 @@ export default function SiteProfileRuntime() {
     window.addEventListener('message', onPreview);
 
     return () => {
+      isActive = false;
+      cancelIdleTask(idleHandle);
       window.removeEventListener('storage', onStorage);
       window.removeEventListener('ubhi:site-profile-updated', onCustom);
       window.removeEventListener('message', onPreview);

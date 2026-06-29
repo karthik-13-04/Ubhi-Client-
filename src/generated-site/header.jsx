@@ -1,39 +1,40 @@
 'use client';
+import Link from 'next/link';
 
 export default function Header() {
   return (
     <header className="site-header" data-header="">
-      <a className="brand" href="#home" aria-label="Ubhi home">
-        <img src="assets/ubhi-logo-transparent.png" alt="Ubhi" />
+      <Link className="brand" href="/" aria-label="Ubhi home">
+        <img src="/assets/ubhi-logo-transparent.png" alt="Ubhi" />
         <span className="brand-tagline">
           Look within to ascend
         </span>
-      </a>
+      </Link>
       <nav className="nav-links" aria-label="Primary navigation">
-        <a href="/#home" data-page="home">
+        <Link href="/" data-page="home">
           Home
-        </a>
-        <a href="/snail-mail#snail-mail" data-page="snail-mail">
+        </Link>
+        <Link href="/snail-mail" data-page="snail-mail">
           Snail Mail
-        </a>
-        <a href="/art#art" data-page="art">
+        </Link>
+        <Link href="/art" data-page="art">
           Art Portfolio
-        </a>
-        <a href="/shop#shop" data-page="shop">
+        </Link>
+        <Link href="/shop" data-page="shop">
           Shop
-        </a>
-        <a href="/workshops#workshops" data-page="workshops">
+        </Link>
+        <Link href="/workshops" data-page="workshops">
           Workshops
-        </a>
-        <a href="/journal#journal" data-page="journal">
+        </Link>
+        <Link href="/journal" data-page="journal">
           Journal
-        </a>
-        <a href="/about#about" data-page="about">
+        </Link>
+        <Link href="/about" data-page="about">
           About
-        </a>
-        <a href="/account#account" data-page-link="account" className="nav-mobile-only">
+        </Link>
+        <Link href="/account" data-page-link="account" className="nav-mobile-only">
           Sign in
-        </a>
+        </Link>
         <div className="nav-social" aria-label="Find us">
           <a className="soc-ig" href="https://instagram.com/ubhi.in" target="_blank" rel="noopener noreferrer" aria-label="Ubhi on Instagram">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
@@ -70,7 +71,7 @@ export default function Header() {
             </svg>
           </a>
         </div>
-        <a className="nav-account" href="#account" data-page-link="account" aria-label="Sign in to your account">
+        <Link className="nav-account" href="/account" data-page-link="account" aria-label="Sign in to your account">
           <svg className="nav-account-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
             <circle cx="12" cy="8" r="3.3" />
             <path d="M5.5 19.5a6.5 6.5 0 0 1 13 0" />
@@ -78,13 +79,13 @@ export default function Header() {
           <span>
             Sign in
           </span>
-        </a>
-        <a className="nav-cta" href="#workshops" onClick={(e) => {
+        </Link>
+        <Link className="nav-cta" href="/workshops" onClick={(e) => {
           e.preventDefault();
           window.ubhiOpenModal?.('booking');
         }}>
           Reserve a space
-        </a>
+        </Link>
         <button className="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-nav-toggle="">
           <span className="nt-label nt-open">
             Menu
@@ -97,3 +98,5 @@ export default function Header() {
     </header>
   );
 }
+
+

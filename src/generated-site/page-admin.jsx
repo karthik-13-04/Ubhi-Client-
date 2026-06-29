@@ -1,6 +1,6 @@
 export default function PageAdmin() {
   return (
-    <div id="page-admin" className="page">
+    <div id="page-admin" className="page is-active">
       <div id="admin-gate" className="admin-gate-wrapper reveal">
         <div className="admin-login-card">
           <div className="admin-login-header">

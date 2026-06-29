@@ -1,6 +1,6 @@
 export default function PageCookies() {
   return (
-    <div id="page-cookies" className="page legal-page">
+    <div id="page-cookies" className="page is-active legal-page">
       <div className="legal-wrap">
         <p className="eyebrow">
           the fine print

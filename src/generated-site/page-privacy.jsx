@@ -1,6 +1,6 @@
 export default function PagePrivacy() {
   return (
-    <div id="page-privacy" className="page legal-page">
+    <div id="page-privacy" className="page is-active legal-page">
       <div className="legal-wrap">
         <p className="eyebrow">
           the fine print

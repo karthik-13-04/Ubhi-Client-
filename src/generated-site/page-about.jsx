@@ -1,6 +1,6 @@
 export default function PageAbout() {
   return (
-    <div id="page-about" className="page">
+    <div id="page-about" className="page is-active">
       <section id="about" className="about section-pad">
         <div className="about-geo" aria-hidden="true">
           <svg viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -2458,6 +2458,14 @@ select option { background: var(--cosmos); }
   padding-top: 8px;
 }
 
+.product-price, .product-footer strong {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 1.4rem;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--stardust-full);
+}
+
 .product-footer .button {
   padding: 6px 12px;
   font-size: 0.72rem;

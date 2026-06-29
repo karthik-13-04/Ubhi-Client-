@@ -1,7 +1,7 @@
 import { SnailMailGallery } from '../components/ClientLists';
 export default function PageSnailMail() {
   return (
-    <div id="page-snail-mail" className="page">
+    <div id="page-snail-mail" className="page is-active">
       <div className="page-hero">
         <div className="page-hero-geo" aria-hidden="true">
           <svg viewBox="0 0 400 400" fill="none">
@@ -509,6 +509,7 @@ export default function PageSnailMail() {
               <p className="snail-plan-desc">
                 Month to month, no commitment — pause or cancel whenever you like.
               </p>
+              <button type="button" className="button button-primary" style={{ width: '100%', marginTop: 'auto' }}>SUBSCRIBE &hearts;</button>
             </div>
             <div className="snail-plan-card" data-plan="3 Months" data-price="16.33" data-total="49" data-term="3" data-prepay="true" data-desc="A gentle first season — three letters to begin, paid in one go.">
               <div className="plan-wax-seal">
@@ -533,6 +534,7 @@ export default function PageSnailMail() {
               <p className="snail-plan-desc">
                 A gentle first season — three letters to begin, paid in one go.
               </p>
+              <button type="button" className="button button-primary" style={{ width: '100%', marginTop: 'auto' }}>SUBSCRIBE &hearts;</button>
             </div>
             <div className="snail-plan-card" data-plan="6 Months" data-price="15.83" data-total="95" data-term="6" data-prepay="true" data-desc="Half a year of handmade post, wrapped in botanically-dyed linen.">
               <div className="plan-wax-seal">
@@ -557,6 +559,7 @@ export default function PageSnailMail() {
               <p className="snail-plan-desc">
                 Half a year of handmade post, wrapped in botanically-dyed linen.
               </p>
+              <button type="button" className="button button-primary" style={{ width: '100%', marginTop: 'auto' }}>SUBSCRIBE &hearts;</button>
             </div>
             <div className="snail-plan-card snail-plan-featured is-active" data-plan="12 Months" data-price="12.42" data-total="149" data-term="12" data-prepay="true" data-desc="A full year of slow post — twelve parcels, opened with a hand-thrown clay inkwell.">
               <span className="snail-featured-ribbon">
@@ -587,6 +590,7 @@ export default function PageSnailMail() {
               <p className="snail-plan-desc">
                 A full year of slow post — twelve parcels, opened with a hand-thrown clay inkwell.
               </p>
+              <button type="button" className="button button-primary" style={{ width: '100%', marginTop: 'auto' }}>SUBSCRIBE &hearts;</button>
             </div>
           </div>
           <div className="snail-plans-footer">

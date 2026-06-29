@@ -1,7 +1,7 @@
 import { WorkshopsList } from '../components/ClientLists';
 export default function PageWorkshops() {
   return (
-    <div id="page-workshops" className="page">
+    <div id="page-workshops" className="page is-active">
       <div className="page-hero">
         <div className="page-hero-geo" aria-hidden="true">
           <svg viewBox="0 0 400 400" fill="none">

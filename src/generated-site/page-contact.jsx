@@ -1,6 +1,6 @@
 export default function PageContact() {
   return (
-    <div id="page-contact" className="page legal-page">
+    <div id="page-contact" className="page is-active legal-page">
       <div className="legal-wrap">
         <p className="eyebrow">
           say hello

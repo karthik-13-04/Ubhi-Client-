@@ -1,7 +1,7 @@
 import { JournalList } from '../components/ClientLists';
 export default function PageJournal() {
   return (
-    <div id="page-journal" className="page">
+    <div id="page-journal" className="page is-active">
       <div className="page-hero">
         <div className="page-hero-geo" aria-hidden="true">
           <svg viewBox="0 0 400 400" fill="none">

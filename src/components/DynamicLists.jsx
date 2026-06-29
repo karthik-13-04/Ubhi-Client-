@@ -2,7 +2,8 @@
 
 import React from 'react';
 import useStore from '../hooks/useStore';
-import { formatPrice } from '../lib/utils';
+import useCart from '../hooks/useCart';
+import { formatPrice, readingTime, JOURNAL_CARD_COLORS, PRODUCT_VECTORS } from '../lib/utils';
 
 function useMounted() {
   const [mounted, setMounted] = React.useState(false);
@@ -91,18 +92,16 @@ export function WorkshopsList() {
 export function ShopList() {
   const mounted = useMounted();
   const [catalog] = useStore('shop-catalog', []);
+  const { addItem } = useCart();
   
   if (!mounted) return null;
   if (!catalog || catalog.length === 0) return null;
-
-  const { addItem } = require('../hooks/useCart').default();
 
   return (
     <>
       {catalog.map((item, idx) => {
         const isSoldOut = item.remainingStock <= 0;
-        const vectors = require('../lib/utils').PRODUCT_VECTORS;
-        const artHTML = vectors[item.vector] || vectors.lotus;
+        const artHTML = PRODUCT_VECTORS[item.vector] || PRODUCT_VECTORS.lotus;
 
         return (
           <article className="product-card reveal" key={idx}>
@@ -117,7 +116,7 @@ export function ShopList() {
                 <span className="product-price">£{formatPrice(item.price)}</span>
                 <button
                   type="button"
-                  className="add-to-cart-btn"
+                  className="button button-secondary"
                   disabled={isSoldOut}
                   onClick={() => {
                     addItem(item.name, item.price, artHTML);
@@ -127,19 +126,7 @@ export function ShopList() {
                   }}
                   aria-label={`Add ${item.name} to bag`}
                 >
-                  <span className="atc-icon">
-                    {isSoldOut ? (
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" width="20" height="20">
-                        <circle cx="12" cy="12" r="10" />
-                        <line x1="4.93" y1="4.93" x2="19.07" y2="19.07" />
-                      </svg>
-                    ) : (
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" width="20" height="20">
-                        <path d="M12 4v16m8-8H4" />
-                      </svg>
-                    )}
-                  </span>
-                  <span className="atc-text">{isSoldOut ? 'Sold Out' : 'Add to Bag'}</span>
+                  {isSoldOut ? 'Sold Out' : 'Bring home'}
                 </button>
               </div>
             </div>
@@ -157,28 +144,31 @@ export function SnailMailGallery() {
   if (!mounted) return null;
   if (!photos || photos.length === 0) return null;
 
+  const rotations = ["snail-rot-left-1", "snail-rot-right-1", "snail-rot-left-2", "snail-rot-right-2", "snail-rot-zero"];
+
   return (
     <>
-      {photos.map((ph, idx) => (
-        <div 
-          className="snail-gallery-item" 
-          key={idx}
-          onClick={() => {
-            if (typeof window !== 'undefined' && window.ubhiOpenModal) {
-              window.ubhiOpenModal('gallery', {
-                images: photos.map(p => p.src),
-                caption: ph.caption,
-                startIndex: idx
-              });
-            }
-          }}
-        >
-          <img src={ph.src} alt={ph.caption} loading="lazy" />
-          <div className="sgi-overlay">
-            <span className="sgi-cap">{ph.caption}</span>
+      {photos.map((ph, idx) => {
+        const rotClass = rotations[idx % rotations.length];
+        return (
+          <div 
+            className={`gallery-item snail-photo-card ${rotClass}`}
+            key={idx}
+            onClick={() => {
+              if (typeof window !== 'undefined' && window.ubhiOpenModal) {
+                window.ubhiOpenModal('gallery', {
+                  images: photos.map(p => p.src),
+                  caption: ph.caption,
+                  startIndex: idx
+                });
+              }
+            }}
+          >
+            <img src={ph.src} alt={ph.caption} loading="lazy" />
+            <div className="snail-photo-caption">{ph.caption}</div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </>
   );
 }
@@ -186,7 +176,6 @@ export function SnailMailGallery() {
 export function JournalList() {
   const mounted = useMounted();
   const [essays] = useStore('journal-posts', []);
-  const { readingTime, JOURNAL_CARD_COLORS } = require('../lib/utils');
 
   if (!mounted) return null;
   if (!essays || essays.length === 0) return null;

@@ -3,3 +3,26 @@ body {
   margin: 0;
   min-height: 100%;
 }
+
+/*
+ * Next.js multi-page mode: each route renders exactly ONE .page div in the DOM.
+ * The legacy SPA CSS sets .page { display: none } and relies on JS to toggle
+ * is-active. In Next.js, we override this so a lone .page is always visible,
+ * eliminating the blank flash before script.js hydrates.
+ */
+main > div[id^="page-"] {
+  display: block !important;
+}
+
+/*
+ * The legacy SPA uses .reveal { opacity: 0 } and relies on JS IntersectionObserver
+ * to add .is-visible. In Next.js, content must be visible immediately (SSR).
+ * We set opacity: 1 by default here so content never appears blank.
+ * The JS stagger animation (triggerInnerPageReveals) still runs and looks great
+ * because browsers treat the transition from 1→0→1 gracefully.
+ * On home page, scroll-based reveals still work via the observer.
+ */
+main > div[id^="page-"] .reveal {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}

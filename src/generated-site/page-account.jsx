@@ -1,6 +1,6 @@
 export default function PageAccount() {
   return (
-    <div id="page-account" className="page">
+    <div id="page-account" className="page is-active">
       <div id="member-gate" className="member-gate-wrapper reveal">
         <div className="member-login-card">
           <span className="member-login-wax" aria-hidden="true">

@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import bcrypt from 'bcryptjs';
 import { getDb } from '../../../src/lib/db';
 import {
   defaultWorkshops,
@@ -7,7 +8,7 @@ import {
 
 /**
  * POST /api/seed
- * Seeds MongoDB with default workshops and products if collections are empty.
+ * Seeds MongoDB with default workshops, products, and admin user if collections are empty.
  * Safe to call multiple times — only inserts if empty.
  */
 export async function POST() {
@@ -42,6 +43,21 @@ export async function POST() {
       results.products = `Seeded ${productsToSeed.length} products`;
     } else {
       results.products = `Skipped — ${productCount} products already exist`;
+    }
+
+    // Seed admin/owner user
+    const usersCount = await db.collection('users').countDocuments();
+    if (usersCount === 0) {
+      const defaultPasswordHash = bcrypt.hashSync('admin123', 10);
+      await db.collection('users').insertOne({
+        email: 'hello@ubhi.in',
+        password: defaultPasswordHash,
+        role: 'owner',
+        createdAt: new Date(),
+      });
+      results.admin = 'Seeded default admin user: hello@ubhi.in / admin123';
+    } else {
+      results.admin = `Skipped — ${usersCount} users already exist`;
     }
 
     return NextResponse.json({ success: true, results });

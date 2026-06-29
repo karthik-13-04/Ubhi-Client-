@@ -4152,11 +4152,13 @@ details p { margin: 14px 0 4px; font-size: 0.96rem; }
   height: 100vh;
   z-index: 1100;
   visibility: hidden;
+  pointer-events: none;
   transition: visibility 400ms ease;
 }
 
 .cart-drawer.is-active {
   visibility: visible;
+  pointer-events: auto;
 }
 
 .cart-drawer-overlay {
@@ -4166,11 +4168,13 @@ details p { margin: 14px 0 4px; font-size: 0.96rem; }
   background: rgba(60, 42, 28, 0.65);
   backdrop-filter: blur(4px);
   opacity: 0;
+  pointer-events: none;
   transition: opacity 400ms ease;
 }
 
 .cart-drawer.is-active .cart-drawer-overlay {
   opacity: 1;
+  pointer-events: auto;
 }
 
 .cart-drawer-panel {

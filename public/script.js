@@ -28,6 +28,27 @@ const PAGE_MAP = {
   "#404":        "page-404",
 };
 
+// Pathname → page-id map for Next.js multi-page routing
+const PATHNAME_MAP = {
+  "/":           "page-home",
+  "/about":      "page-about",
+  "/workshops":  "page-workshops",
+  "/shop":       "page-shop",
+  "/snail-mail": "page-snail-mail",
+  "/art":        "page-art",
+  "/journal":    "page-journal",
+  "/admin":      "page-admin",
+  "/account":    "page-account",
+  "/contact":    "page-contact",
+  "/faq":        "page-faq",
+  "/shipping":   "page-shipping",
+  "/refunds":    "page-refunds",
+  "/privacy":    "page-privacy",
+  "/cookies":    "page-cookies",
+  "/terms":      "page-terms",
+};
+
+
 const NAV_HASH = {
   "page-home":       "#home",
   "page-about":      "#about",
@@ -217,20 +238,7 @@ function navigate(hash, scrollToBooking = false) {
   // Authentication check for admin panel
   if (pageId === "page-admin") {
     const isAuthenticated = safeLocalRead("ubhi-admin-authenticated") === "true";
-    const gate = document.getElementById("admin-gate");
-    const dashboard = document.getElementById("admin-dashboard");
-    if (isAuthenticated) {
-      if (gate) gate.style.display = "none";
-      if (dashboard) {
-        dashboard.style.display = "grid";
-        if (typeof renderAdminDashboard === "function") {
-          renderAdminDashboard();
-        }
-      }
-    } else {
-      if (gate) gate.style.display = "flex";
-      if (dashboard) dashboard.style.display = "none";
-    }
+    setAdminGateState(isAuthenticated);
   }
 
   // Member account: show the sign-in card or the dashboard
@@ -5757,41 +5765,65 @@ function getAdminPass() {
   return safeLocalRead("ubhi-admin-pass") || "ubhi123";
 }
 
+function setAdminGateState(isAuthenticated) {
+  const gate = document.getElementById("admin-gate");
+  const dashboard = document.getElementById("admin-dashboard");
+  if (gate) gate.style.display = isAuthenticated ? "none" : "flex";
+  if (dashboard) dashboard.style.display = isAuthenticated ? "grid" : "none";
+  if (isAuthenticated && typeof renderAdminDashboard === "function") {
+    renderAdminDashboard();
+  }
+}
+
+function handleAdminUnlock() {
+  const passcode = document.getElementById("admin-passcode")?.value || "";
+  const errorMsg = document.getElementById("admin-login-error");
+
+  if (passcode === getAdminPass()) {
+    safeLocalWrite("ubhi-admin-authenticated", "true");
+    if (errorMsg) errorMsg.style.display = "none";
+    setAdminGateState(true);
+    return true;
+  }
+
+  if (errorMsg) {
+    errorMsg.textContent = "Invalid credentials. Try again.";
+    errorMsg.style.display = "block";
+  }
+  return false;
+}
+
 const loginForm = document.getElementById("admin-login-form");
 if (loginForm) {
   loginForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    const passcode = document.getElementById("admin-passcode")?.value || "";
-    const errorMsg = document.getElementById("admin-login-error");
-
-    if (passcode === getAdminPass()) {
-      safeLocalWrite("ubhi-admin-authenticated", "true");
-      if (errorMsg) errorMsg.style.display = "none";
-      
-      const gate = document.getElementById("admin-gate");
-      const dashboard = document.getElementById("admin-dashboard");
-      if (gate) gate.style.display = "none";
-      if (dashboard) {
-        dashboard.style.display = "grid";
-        renderAdminDashboard();
-      }
-    } else {
-      if (errorMsg) {
-        errorMsg.textContent = "Invalid credentials. Try again.";
-        errorMsg.style.display = "block";
-      }
-    }
+    handleAdminUnlock();
   });
+
+  const unlockButton = loginForm.querySelector('button[type="submit"]');
+  if (unlockButton) {
+    unlockButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      handleAdminUnlock();
+    });
+  }
+
+  const passcodeEl = document.getElementById("admin-passcode");
+  if (passcodeEl) {
+    passcodeEl.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        handleAdminUnlock();
+      }
+    });
+  }
 }
 
 const logoutBtn = document.getElementById("admin-logout-btn");
 if (logoutBtn) {
   logoutBtn.addEventListener("click", () => {
     safeLocalRemove("ubhi-admin-authenticated");
-    const gate = document.getElementById("admin-gate");
-    const dashboard = document.getElementById("admin-dashboard");
-    if (gate) gate.style.display = "flex";
-    if (dashboard) dashboard.style.display = "none";
+    setAdminGateState(false);
     const passcodeEl = document.getElementById("admin-passcode");
     if (passcodeEl) passcodeEl.value = "";
   });
@@ -7144,11 +7176,64 @@ try { initSnailMailCRMListeners(); } catch (e) { console.error("Snail CRM listen
   }, 5500);                                       // dwell ~5.5s; CSS handles the 1.6s fade
 })();
 
-// ── INITIAL PAGE LOAD (called LAST — all helpers defined above) ──
-let initHash = location.hash;
-if (!initHash) {
-  if (location.pathname.startsWith("/admin")) initHash = "#admin";
-  else initHash = "#home";
-}
-navigate(initHash);
+// ── INITIAL PAGE LOAD (Next.js multi-page mode) ──
+// In Next.js, each route renders exactly one page component with class="page is-active".
+// We must NOT strip is-active on load; instead we just run the post-navigate side-effects
+// (particles, admin auth checks, etc.) for the current route.
+(function () {
+  var pathname = location.pathname.replace(/\/$/, '') || '/';
+  var pageId = PATHNAME_MAP[pathname] || 'page-home';
+  currentPageId = pageId;
+
+  // Ensure the current page is visible (in case script runs before React hydration)
+  var target = document.getElementById(pageId);
+  if (target) target.classList.add('is-active');
+
+  // Admin auth check
+  if (pageId === 'page-admin') {
+    var isAuthenticated = safeLocalRead('ubhi-admin-authenticated') === 'true';
+    setAdminGateState(isAuthenticated);
+  }
+
+  // Member account check
+  if (pageId === 'page-account') {
+    var memberAuthed = safeLocalRead('ubhi-member-authenticated') === 'true';
+    var mGate = document.getElementById('member-gate');
+    var mDash = document.getElementById('member-dashboard');
+    if (memberAuthed) {
+      if (mGate) mGate.style.display = 'none';
+      if (mDash) {
+        mDash.style.display = 'block';
+        if (typeof renderMemberDashboard === 'function') renderMemberDashboard();
+      }
+    } else {
+      if (mGate) mGate.style.display = '';
+      if (mDash) mDash.style.display = 'none';
+    }
+  }
+
+  // Art portfolio
+  if (pageId === 'page-art' && typeof renderArtPortfolio === 'function') {
+    renderArtPortfolio();
+  }
+
+  // Particles on home only
+  if (pageId === 'page-home') {
+    startParticles();
+    if (target) {
+      target.querySelectorAll('.reveal').forEach(function (el) {
+        el.classList.remove('is-visible');
+        revealObserver.observe(el);
+      });
+    }
+  } else {
+    stopParticles();
+    triggerInnerPageReveals(target);
+  }
+
+  // SEO
+  applyRouteSeo(pageId);
+  if (typeof normalizeTickerSpeeds === 'function') normalizeTickerSpeeds();
+})();
+
 

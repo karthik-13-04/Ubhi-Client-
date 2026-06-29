@@ -87,6 +87,7 @@ export default function Overlays() {
         className="floating-cart-btn"
         aria-label="Open shopping bag"
         onClick={() => setIsCartOpen(true)}
+        suppressHydrationWarning
       >
         <svg className="cart-amulet-geo" viewBox="0 0 100 100" aria-hidden="true">
           <circle cx="50" cy="50" r="46" stroke="var(--aurora-gold)" strokeWidth="0.75" strokeDasharray="2 3" fill="none" />

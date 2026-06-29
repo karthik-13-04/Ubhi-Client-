@@ -1,7 +1,7 @@
 import { ShopList } from '../components/ClientLists';
 export default function PageShop() {
   return (
-    <div id="page-shop" className="page">
+    <div id="page-shop" className="page is-active">
       <div className="page-hero">
         <div className="page-hero-geo" aria-hidden="true">
           <svg viewBox="0 0 400 400" fill="none">

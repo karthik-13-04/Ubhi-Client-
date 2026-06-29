@@ -5,10 +5,10 @@
 
 // ── Gallery ──
 export const defaultGalleryItems = [
-  { src: 'assets/gallery-chelsea.png', alt: 'Chelsea Kaur Ubhi in her studio' },
-  { src: 'assets/gallery-yoga-breath.png', alt: 'Somatic yoga and breathwork guidance' },
-  { src: 'assets/gallery-block-print.png', alt: 'Hand carving linoleum block printing stamp' },
-  { src: 'assets/gallery-geometry-draw.png', alt: 'Sacred geometry drawing session' },
+  { src: 'https://sin1.contabostorage.com/d9a91b8a36b34cc59e571d07f57dd57b:ubhi/assets/gallery-chelsea.png', alt: 'Chelsea Kaur Ubhi in her studio' },
+  { src: 'https://sin1.contabostorage.com/d9a91b8a36b34cc59e571d07f57dd57b:ubhi/assets/gallery-yoga-breath.png', alt: 'Somatic yoga and breathwork guidance' },
+  { src: 'https://sin1.contabostorage.com/d9a91b8a36b34cc59e571d07f57dd57b:ubhi/assets/gallery-block-print.png', alt: 'Hand carving linoleum block printing stamp' },
+  { src: 'https://sin1.contabostorage.com/d9a91b8a36b34cc59e571d07f57dd57b:ubhi/assets/gallery-geometry-draw.png', alt: 'Sacred geometry drawing session' },
 ];
 
 // ── Workshops ──
@@ -21,7 +21,7 @@ export const defaultWorkshops = [
     place: 'Hackney studio',
     price: 58,
     capacity: 10,
-    image: 'assets/ubhi-workshop-generated.png',
+    image: 'https://sin1.contabostorage.com/d9a91b8a36b34cc59e571d07f57dd57b:ubhi/assets/ubhi-workshop-generated.png',
   },
   {
     title: 'Sacred Geometry Drawing',
@@ -31,7 +31,7 @@ export const defaultWorkshops = [
     place: 'Hackney studio',
     price: 44,
     capacity: 8,
-    image: 'assets/gallery-geometry-draw.png',
+    image: 'https://sin1.contabostorage.com/d9a91b8a36b34cc59e571d07f57dd57b:ubhi/assets/gallery-geometry-draw.png',
   },
   {
     title: 'Watercolour & Sound (AUM)',
@@ -41,7 +41,7 @@ export const defaultWorkshops = [
     place: 'Hackney studio',
     price: 52,
     capacity: 10,
-    image: 'assets/gallery-chelsea.png',
+    image: 'https://sin1.contabostorage.com/d9a91b8a36b34cc59e571d07f57dd57b:ubhi/assets/gallery-chelsea.png',
   },
   {
     title: 'Breathwork & Clay Pots',
@@ -51,7 +51,7 @@ export const defaultWorkshops = [
     place: 'Hackney studio',
     price: 48,
     capacity: 8,
-    image: 'assets/gallery-yoga-breath.png',
+    image: 'https://sin1.contabostorage.com/d9a91b8a36b34cc59e571d07f57dd57b:ubhi/assets/gallery-yoga-breath.png',
   },
   {
     title: 'Somatic Silk Dyeing',
@@ -61,7 +61,7 @@ export const defaultWorkshops = [
     place: 'Hackney studio',
     price: 64,
     capacity: 8,
-    image: 'assets/gallery-block-print.png',
+    image: 'https://sin1.contabostorage.com/d9a91b8a36b34cc59e571d07f57dd57b:ubhi/assets/gallery-block-print.png',
   },
   {
     title: 'Restorative Art & Ink Flow',
@@ -71,7 +71,7 @@ export const defaultWorkshops = [
     place: 'Hackney studio',
     price: 46,
     capacity: 10,
-    image: 'assets/gallery-yoga-breath.png',
+    image: 'https://sin1.contabostorage.com/d9a91b8a36b34cc59e571d07f57dd57b:ubhi/assets/gallery-yoga-breath.png',
   },
   {
     title: 'Lunar Yin & Ink Wash',
@@ -143,18 +143,18 @@ export const defaultShopCatalog = [
 
 // ── Snail Mail ──
 export const defaultSnailPhotos = [
-  { src: 'assets/gallery-chelsea.png', caption: 'January — Vol. 01: AUM ॐ' },
-  { src: 'assets/gallery-yoga-breath.png', caption: 'February — Vol. 02: Presence 🧘' },
-  { src: 'assets/gallery-block-print.png', caption: 'March — Vol. 03: Carving 🪵' },
-  { src: 'assets/gallery-geometry-draw.png', caption: 'April — Vol. 04: Symmetry 📐' },
-  { src: 'assets/ubhi-snail-mail-generated.png', caption: 'May — Vol. 05: Slow post ✉️' },
-  { src: 'assets/ubhi-workshop-generated.png', caption: 'June — Vol. 06: Crafting 🏺' },
-  { src: 'assets/gallery-chelsea.png', caption: 'July — Vol. 07: Silence 🤫' },
-  { src: 'assets/gallery-yoga-breath.png', caption: 'August — Vol. 08: Sound 🔊' },
-  { src: 'assets/gallery-block-print.png', caption: 'September — Vol. 09: Alchemy 🧪' },
-  { src: 'assets/gallery-geometry-draw.png', caption: 'October — Vol. 10: Geometry 🌀' },
-  { src: 'assets/ubhi-snail-mail-generated.png', caption: 'November — Vol. 11: Stardust ✨' },
-  { src: 'assets/ubhi-workshop-generated.png', caption: 'December — Vol. 12: Ascend 👁️' },
+  { src: 'https://sin1.contabostorage.com/d9a91b8a36b34cc59e571d07f57dd57b:ubhi/assets/gallery-chelsea.png', caption: 'January — Vol. 01: AUM ॐ' },
+  { src: 'https://sin1.contabostorage.com/d9a91b8a36b34cc59e571d07f57dd57b:ubhi/assets/gallery-yoga-breath.png', caption: 'February — Vol. 02: Presence 🧘' },
+  { src: 'https://sin1.contabostorage.com/d9a91b8a36b34cc59e571d07f57dd57b:ubhi/assets/gallery-block-print.png', caption: 'March — Vol. 03: Carving 🪵' },
+  { src: 'https://sin1.contabostorage.com/d9a91b8a36b34cc59e571d07f57dd57b:ubhi/assets/gallery-geometry-draw.png', caption: 'April — Vol. 04: Symmetry 📐' },
+  { src: 'https://sin1.contabostorage.com/d9a91b8a36b34cc59e571d07f57dd57b:ubhi/assets/ubhi-snail-mail-generated.png', caption: 'May — Vol. 05: Slow post ✉️' },
+  { src: 'https://sin1.contabostorage.com/d9a91b8a36b34cc59e571d07f57dd57b:ubhi/assets/ubhi-workshop-generated.png', caption: 'June — Vol. 06: Crafting 🏺' },
+  { src: 'https://sin1.contabostorage.com/d9a91b8a36b34cc59e571d07f57dd57b:ubhi/assets/gallery-chelsea.png', caption: 'July — Vol. 07: Silence 🤫' },
+  { src: 'https://sin1.contabostorage.com/d9a91b8a36b34cc59e571d07f57dd57b:ubhi/assets/gallery-yoga-breath.png', caption: 'August — Vol. 08: Sound 🔊' },
+  { src: 'https://sin1.contabostorage.com/d9a91b8a36b34cc59e571d07f57dd57b:ubhi/assets/gallery-block-print.png', caption: 'September — Vol. 09: Alchemy 🧪' },
+  { src: 'https://sin1.contabostorage.com/d9a91b8a36b34cc59e571d07f57dd57b:ubhi/assets/gallery-geometry-draw.png', caption: 'October — Vol. 10: Geometry 🌀' },
+  { src: 'https://sin1.contabostorage.com/d9a91b8a36b34cc59e571d07f57dd57b:ubhi/assets/ubhi-snail-mail-generated.png', caption: 'November — Vol. 11: Stardust ✨' },
+  { src: 'https://sin1.contabostorage.com/d9a91b8a36b34cc59e571d07f57dd57b:ubhi/assets/ubhi-workshop-generated.png', caption: 'December — Vol. 12: Ascend 👁️' },
 ];
 
 export const defaultSnailReviews = [

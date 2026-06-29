@@ -24,13 +24,8 @@
   var API = (function () {
     if (window.UBHI_API_BASE) return String(window.UBHI_API_BASE).replace(/\/$/, '');
     var loc = window.location;
-    if (loc.protocol === 'file:') return 'http://localhost:8090/api';
-    // A static dev server (e.g. :8099) talks to the backend on :8090.
-    if (loc.port && loc.port !== '80' && loc.port !== '443') {
-      if (loc.port === '8090') return loc.origin + '/api';
-      return loc.protocol + '//' + loc.hostname + ':8090/api';
-    }
-    return loc.origin + '/api'; // deployed same-origin
+    if (loc.protocol === 'file:') return 'http://localhost:3000/api';
+    return loc.origin + '/api'; // Always use same-origin since backend and frontend are merged in Next.js
   })();
 
   // Content collections the storefront syncs (must match the backend allow-list).

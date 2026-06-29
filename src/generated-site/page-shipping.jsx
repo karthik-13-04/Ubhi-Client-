@@ -1,6 +1,6 @@
 export default function PageShipping() {
   return (
-    <div id="page-shipping" className="page legal-page">
+    <div id="page-shipping" className="page is-active legal-page">
       <div className="legal-wrap">
         <p className="eyebrow">
           the fine print

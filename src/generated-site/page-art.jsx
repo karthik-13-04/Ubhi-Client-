@@ -2,7 +2,7 @@ import { ArtPortfolioList } from '../components/ClientLists';
 
 export default function PageArt() {
   return (
-    <div id="page-art" className="page">
+    <div id="page-art" className="page is-active">
       <div className="page-hero">
         <div className="page-hero-geo" aria-hidden="true">
           <svg viewBox="0 0 400 400" fill="none">

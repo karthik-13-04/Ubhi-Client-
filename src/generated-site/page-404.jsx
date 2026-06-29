@@ -1,6 +1,6 @@
 export default function Page404() {
   return (
-    <div id="page-404" className="page legal-page">
+    <div id="page-404" className="page is-active legal-page">
       <div className="legal-wrap legal-404">
         <span className="legal-404-wax" aria-hidden="true">
           ?

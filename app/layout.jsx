@@ -4,38 +4,7 @@ import SiteProfileRuntime from '../src/components/SiteProfileRuntime';
 import HeroMotionRuntime from '../src/components/HeroMotionRuntime';
 import { Footer, Header, Overlays } from '../src/generated-site';
 
-const routeHashes = {
-  '/': '#home',
-  '/about': '#about',
-  '/workshops': '#workshops',
-  '/shop': '#shop',
-  '/snail-mail': '#snail-mail',
-  '/art': '#art',
-  '/journal': '#journal',
-  '/account': '#account',
-  '/contact': '#contact',
-  '/faq': '#faq',
-  '/shipping': '#shipping',
-  '/refunds': '#refunds',
-  '/privacy': '#privacy',
-  '/cookies': '#cookies',
-  '/terms': '#terms',
-};
 
-const hashBootstrap = `
-  (function () {
-    var routeMap = ${JSON.stringify(routeHashes)};
-    var pathname = window.location.pathname.replace(/\\/$/, '') || '/';
-    var wanted = routeMap[pathname];
-    if (wanted) {
-      if (window.location.hash !== wanted) {
-        window.history.replaceState(null, '', pathname + wanted);
-      }
-    } else if (pathname === '/admin' && window.location.hash) {
-      window.history.replaceState(null, '', pathname);
-    }
-  })();
-`;
 
 export const metadata = {
   title: 'Ubhi.in | Yoga, Art & Slow Ritual - London',
@@ -45,7 +14,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <meta charSet="utf-8" />
         <meta httpEquiv="Cache-Control" content="no-cache, must-revalidate" />
@@ -66,7 +35,7 @@ export default function RootLayout({ children }) {
         <link rel="stylesheet" href="/artwork.css?v=1.7.0" />
         <link rel="stylesheet" href="/embellish.css?v=1.7.0" />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         <SiteProfileRuntime />
         <HeroMotionRuntime />
         <a href="#app" className="skip-link">Skip to content</a>
@@ -76,8 +45,10 @@ export default function RootLayout({ children }) {
         </main>
         <Footer />
         <Overlays />
-        <script dangerouslySetInnerHTML={{ __html: hashBootstrap }} />
-        <Script src="/assets/api.js" strategy="afterInteractive" />
+        {/* Inline: immediately activate the current page before CSS hides it */}
+        <script dangerouslySetInnerHTML={{ __html: `(function(){var m={'/':\'page-home\','/about':\'page-about\','/workshops':\'page-workshops\','/shop':\'page-shop\','/snail-mail':\'page-snail-mail\','/art':\'page-art\','/journal':\'page-journal\','/admin':\'page-admin\','/account':\'page-account\','/contact':\'page-contact\','/faq':\'page-faq\','/shipping':\'page-shipping\','/refunds':\'page-refunds\','/privacy':\'page-privacy\','/cookies':\'page-cookies\','/terms':\'page-terms\'};var p=location.pathname.replace(/\\/$/,'')||'/';var id=m[p];if(id){var el=document.getElementById(id);if(el){el.classList.add('is-active');}}})();` }} />
+
+
         <Script src="/script.js?v=1.7.0" strategy="afterInteractive" />
         <Script src="/world.js?v=1.7.0" strategy="afterInteractive" />
         <Script src="/artwork.js?v=1.7.0" strategy="afterInteractive" />

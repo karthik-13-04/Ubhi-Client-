@@ -1,6 +1,6 @@
 export default function PageFaq() {
   return (
-    <div id="page-faq" className="page legal-page">
+    <div id="page-faq" className="page is-active legal-page">
       <div className="legal-wrap">
         <p className="eyebrow">
           good to know

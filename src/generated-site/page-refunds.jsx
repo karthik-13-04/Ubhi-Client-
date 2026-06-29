@@ -1,6 +1,6 @@
 export default function PageRefunds() {
   return (
-    <div id="page-refunds" className="page legal-page">
+    <div id="page-refunds" className="page is-active legal-page">
       <div className="legal-wrap">
         <p className="eyebrow">
           the fine print

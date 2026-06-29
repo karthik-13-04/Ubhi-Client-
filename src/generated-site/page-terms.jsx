@@ -1,6 +1,6 @@
 export default function PageTerms() {
   return (
-    <div id="page-terms" className="page legal-page">
+    <div id="page-terms" className="page is-active legal-page">
       <div className="legal-wrap">
         <p className="eyebrow">
           the fine print
