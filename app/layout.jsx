@@ -13,7 +13,6 @@ const routeHashes = {
   '/art': '#art',
   '/journal': '#journal',
   '/account': '#account',
-  '/admin': '#admin',
   '/contact': '#contact',
   '/faq': '#faq',
   '/shipping': '#shipping',
@@ -27,9 +26,13 @@ const hashBootstrap = `
   (function () {
     var routeMap = ${JSON.stringify(routeHashes)};
     var pathname = window.location.pathname.replace(/\\/$/, '') || '/';
-    var wanted = routeMap[pathname] || '#404';
-    if (window.location.hash !== wanted) {
-      window.history.replaceState(null, '', pathname + wanted);
+    var wanted = routeMap[pathname];
+    if (wanted) {
+      if (window.location.hash !== wanted) {
+        window.history.replaceState(null, '', pathname + wanted);
+      }
+    } else if (pathname === '/admin' && window.location.hash) {
+      window.history.replaceState(null, '', pathname);
     }
   })();
 `;

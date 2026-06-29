@@ -318,6 +318,14 @@ function normalizeTickerSpeeds() {
 // in restricted contexts (e.g. opening the file directly via file://) — fall back
 // to setting location.hash, which always works.
 function setUrlHash(hash) {
+  if (window.location.pathname.replace(/\/$/, "") === "/admin") {
+    try {
+      history.replaceState(null, "", "/admin");
+    } catch (e) {
+      location.hash = "";
+    }
+    return;
+  }
   try {
     history.pushState(null, "", hash);
     // Some environments accept pushState but don't reflect the hash in the URL;
@@ -5073,6 +5081,7 @@ if (loginForm) {
       if (gate) gate.style.display = "none";
       if (dashboard) {
         dashboard.style.display = "grid";
+        window.scrollTo({ top: 0, behavior: "instant" });
         renderAdminDashboard();
       }
     } else {
@@ -6295,5 +6304,6 @@ try { initSnailMailCRMListeners(); } catch (e) { console.error("Snail CRM listen
 })();
 
 // ── INITIAL PAGE LOAD (called LAST — all helpers defined above) ──
-navigate(location.hash || "#home");
+const initialPath = window.location.pathname.replace(/\/$/, "") || "/";
+navigate(location.hash || (initialPath === "/admin" ? "#admin" : "#home"));
 
